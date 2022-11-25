@@ -58,12 +58,10 @@ if (verificarLogin($login, $senha))
 
     //var_dump($_SESSION);
     header('Location: ../index/form_inicial.php');
-    //echo "Aqui";
 }
 else 
 {
     header('Location: form_login.php?erro=usui');
-    //echo "Ali";
 } 
 
 ?>
