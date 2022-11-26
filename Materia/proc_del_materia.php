@@ -6,17 +6,10 @@
 
     if (isset($_POST['idmateriaDEL'])){
         $id = trim($_POST['idmateriaDEL']);
-        if (liberarExclusao($id)){
-            if ($id != 1){
+        // liberarExclusao($id)          
                 deleteMateria($id);
                 header("Location: form_materia.php?del=1");
-            }else{
-                header("Location: form_materia.php?del=2");
-            }
-        }else{
-            header("Location: form_materia.php?del=0");
-        } 
-    }
+                }
 ?>
 
 
