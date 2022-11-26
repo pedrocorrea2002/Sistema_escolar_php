@@ -1,4 +1,4 @@
-<?php require("../Componente/header.php") ?>
+<?php require_once("../Componente/header.php") ?>
 
 <body>
 <div class="content">

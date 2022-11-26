@@ -1,7 +1,7 @@
-<?php require("../Componente/header.php") ?>
+<?php require_once("../Componente/header.php") ?>
 <body>
 
-<?php require("../Componente/menu.php") ?>
+<?php require_once("../Componente/menu.php") ?>
 
     <div class="content">
         <h2>Página inicial. Bem vindo!</h2>
