@@ -32,20 +32,20 @@ function cadastrarAluno($nome)
     return insereRegistro($sql);
 }
 
-function getName($id)
+function getNameAluno($id)
 {
     $retorno = selectRegistros("select * from aluno where idaluno='" . $id . "'");
 
     return $retorno[0]['nmaluno'];
 }
 
-function setName($id, $nome)
+function setNameAluno($id, $nome)
 {
     $sql = "UPDATE ALUNO SET NMaluno='" . $nome . "' WHERE idaluno=" . $id;
 
     return updateRegistro($sql);
 }
-function delID($id)
+function deleteAluno($id)
 {
     $sql = "DELETE FROM ALUNO  WHERE idaluno=" . $id;   
 

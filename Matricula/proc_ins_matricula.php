@@ -1,17 +1,18 @@
 <?php
 
 require_once("../Componente/header.php");
-require_once("aluno.php");
+require_once("matricula.php");
 require_once("../Utils/valida_formulario.php");
 
-if (!caracteresInvalidos($_POST['cadAluno']) && trim($_POST['cadAluno']) != "") {
-    $valor = trim($_POST['cadAluno']);
-    if (existeAluno($valor)) {
-        die("Já existe um cadastro com esse nome.");
+$idaluno = $_POST['cadAluno'];
+$idmateria = $_POST['cadMateria'];
+
+if (is_numeric($idaluno) && is_numeric($idmateria)) {
+    if (existeMatricula($idaluno, $idmateria)) {
+        die("Já existe um cadastro com essa mesma combinação de informações.");
     } else {
-        $valor = trim($_POST['cadAluno']);
-        cadastrarAluno($valor);
-        header('Location: form_aluno.php');
+        cadastrarMatricula($idaluno,$idmateria);
+        header('Location: form_matricula.php');
     }
 }
 ?>

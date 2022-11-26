@@ -2,7 +2,7 @@
 require_once("../Utils/mysql.php");
 
 $sqlSelect = "select * from alunomatriculado where lower(nmaluno) like '%";
-$novaMatricula = "insert into alunomatriculadp(idaluno,idmateria) values (1@,2@)";
+$novaMatricula = "insert into alunomatriculado(idaluno,idmateria) values (1@,2@)";
 
 function selecionaMatricula($nome)
 {
@@ -14,12 +14,16 @@ function selecionaMatricula($nome)
 
 function listaMatriculas()
 {
-    return selectRegistros("select * from alunomatriculado am inner join aluno a on a.idaluno = am.idaluno");
+    return selectRegistros(
+        'select * from alunomatriculado am '.
+        'inner join aluno a on a.idaluno = am.idaluno '. 
+        'inner join materia m on m.idmateria = am.idmateria'
+    );
 }
 
-function existeMatricula($idaluno)
+function existeMatricula($idaluno,$idmateria)
 {
-    $retorno = selectRegistros("select * from alunomatriculado where idaluno = $idaluno");
+    $retorno = selectRegistros("select * from alunomatriculado where idaluno = $idaluno and idmateria = $idmateria");
 
     if (count($retorno) > 0) return true;
     else return false;
@@ -28,24 +32,27 @@ function cadastrarMatricula($idaluno,$idmateria)
 {
     global $novaMatricula;
     $sql = str_replace("1@",$idaluno,$novaMatricula);
-    $sql = str_replace("2@",$idmateria,$novaMatricula);
+    $sql = str_replace("2@",$idmateria,$sql);
+
+    echo $sql;
 
     return insereRegistro($sql);
 }
 
-// function getName($id)
-// {
-//     $retorno = selectRegistros("select * from alunomatriculado am inner join aluno a on a.idaluno = am.alunomatricula where am.idalunomatriculado=$id");
+function getMatricula($id)
+{
+    $retorno = selectRegistros("select * from alunomatriculado where idalunomatriculado=$id");
 
-//     return $retorno[0]['nmaluno'];
-// }
+    return $retorno;
+}
 
-// function setName($id, $nome)
-// {
-//     $sql = "UPDATE ALUNO SET NMaluno='" . $nome . "' WHERE idaluno=" . $id;
+function setMatricula($id,$idaluno,$idmateria)
+{
+    $sql = "UPDATE alunomatriculado SET idaluno=$idaluno, idmateria=$idmateria WHERE idalunomatriculado=" . $id;
 
-//     return updateRegistro($sql);
-// }
+    return updateRegistro($sql);
+}
+
 function deletaMatricula($id)
 {
     $sql = "DELETE FROM alunomatriculado WHERE idalunomatriculado = $id";   

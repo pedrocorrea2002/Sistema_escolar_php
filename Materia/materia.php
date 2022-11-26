@@ -32,20 +32,21 @@ function cadastrarMateria($nome)
     return insereRegistro($sql);
 }
 
-function getName($id)
+function getNameMateria($id)
 {
     $retorno = selectRegistros("select * from materia where idmateria='" . $id . "'");
 
     return $retorno[0]['dsmateria'];
 }
 
-function setName($id, $nome)
+function setNameMateria($id, $nome)
 {
     $sql = "UPDATE MATERIA SET dsmateria='" . $nome . "' WHERE idmateria=" . $id;
 
     return updateRegistro($sql);
 }
-function delID($id)
+
+function deletaMateria($id)
 {
     $sql = "DELETE FROM MATERIA  WHERE idmateria=" . $id;   
 
