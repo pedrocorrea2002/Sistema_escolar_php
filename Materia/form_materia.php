@@ -67,7 +67,7 @@
         <?php
         if (isset($_GET['alterarid'])) {
             echo '<form action="proc_upd_materia.php" method="POST">';
-            echo '    <input type="text" name="dsmateria" value=" ' . getName($_GET['alterarid']) . ' " />';
+            echo '    <input type="text" name="dsmateria" value=" ' . getNameMateria($_GET['alterarid']) . ' " />';
             echo '    <input type="hidden" name="idmateriaUPD" value="' . $_GET['alterarid'] . '" />';
             echo '    <input type="submit" value="alterar" />';
             echo '</form>';

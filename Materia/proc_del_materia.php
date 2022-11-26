@@ -5,22 +5,17 @@
     require_once("../Materia/materia.php"); //verificação da exclusão
 
     if (isset($_POST['idmateriaDEL'])){
-        if (caracteresInvalidos($_POST['idmateriaDEL'])){
-            die("Caracteres inválidos detectados!");
-        }
-        else{
-            $id = trim($_POST['idmateriaDEL']);
-            if (liberarExclusao($id)){
-                if ($id != 1){
-                    delID($id);
-                    header("Location: form_materia.php?del=1");
-                }else{
-                    header("Location: form_materia.php?del=2");
-                }
+        $id = trim($_POST['idmateriaDEL']);
+        if (liberarExclusao($id)){
+            if ($id != 1){
+                deleteMateria($id);
+                header("Location: form_materia.php?del=1");
             }else{
-                header("Location: form_materia.php?del=0");
-            } 
-        }
+                header("Location: form_materia.php?del=2");
+            }
+        }else{
+            header("Location: form_materia.php?del=0");
+        } 
     }
 ?>
 

@@ -46,7 +46,7 @@ function setNameMateria($id, $nome)
     return updateRegistro($sql);
 }
 
-function deletaMateria($id)
+function deleteMateria($id)
 {
     $sql = "DELETE FROM MATERIA  WHERE idmateria=" . $id;   
 
