@@ -5,13 +5,13 @@
 
     $id = $_POST['idmatricula'];
     $idaluno = $_POST['idaluno'];
-    $idmateria = $_POST['idmateria'];
+    $idnotas = $_POST['idnotas'];
 
-    if (is_numeric($idaluno) && is_numeric($idmateria)) {
-        if (existeMatricula($idaluno, $idmateria)) {
+    if (is_numeric($idaluno) && is_numeric($idnotas)) {
+        if (existeMatricula($idaluno, $idnotas)) {
             die("Já existe um cadastro com essa mesma combinação de informações.");
         } else {
-            setMatricula($id,$idaluno,$idmateria);
+            setMatricula($id,$idaluno,$idnotas);
             header('Location: form_matricula.php');
         }
     }
