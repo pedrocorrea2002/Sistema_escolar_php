@@ -8,8 +8,6 @@ if(isset($_POST['dslogin']) && isset($_POST['idaluno'])){
     $dslogin = $_POST['dslogin'];
     $idaluno = $_POST['idaluno'];
 
-    //FAZER MENSAGEM DE ERRO APARECER NO FRONT CASO A SENHA SEJA MAIOR QUE 10 CARACTERES
-
     if(!is_numeric($idaluno)){
         $msg_aluno = $msg_aluno."Aluno inválido!<br>";
         $status_aluno = 1;

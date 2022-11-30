@@ -2,7 +2,8 @@
 require_once("../Utils/mysql.php");
 
 $sqlSelect = "select * from avaliacaoaluno where lower(notas) like '%";
-$novanotas = "insert into avaliacaoaluno(notas) values ('@')";
+$novanotas = "insert into avaliacaoaluno(idaluno, idavaliacao, nota) values (@idaluno,@idavaliacao,@nota)";
+
 
 function selecionanotas($nome)
 {
@@ -14,7 +15,12 @@ function selecionanotas($nome)
 
 function listanotas()
 {
-    return selectRegistros("select * from avaliacaoaluno order by idavaliacaoaluno");
+    $sqlAvaliacaoAluno = "SELECT aa.idavaliacaoaluno, av.dsavaliacao, al.nmaluno, aa.nota FROM avaliacaoaluno aa ".
+                         "INNER JOIN avaliacao av ON av.idavaliacao = aa.idavaliacao ".
+                         "INNER JOIN aluno al ON al.idaluno = aa.idaluno ". 
+                         "ORDER BY aa.idavaliacaoaluno";
+    
+    return selectRegistros($sqlAvaliacaoAluno);
 }
 
 function existenotas($nome)
@@ -24,10 +30,14 @@ function existenotas($nome)
     if (count($retorno) > 0) return true;
     else return false;
 }
-function cadastrarnotas($nome)
+function cadastrarnotas($idAluno, $idavaliacao, $nota)
 {
     global $novanotas;
-    $sql = str_replace("@",$nome,$novanotas);
+    $sql = str_replace('@idaluno', $idAluno, $novanotas);
+    $sql = str_replace('@idavaliacao', $idavaliacao, $sql);
+    $sql = str_replace('@nota', $nota, $sql);
+
+    echo "aqui: $sql";
 
     return insereRegistro($sql);
 }
