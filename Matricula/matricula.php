@@ -16,8 +16,9 @@ function listaMatriculas()
 {
     return selectRegistros(
         'select * from alunomatriculado am '.
-        'inner join aluno a on a.idaluno = am.idaluno '. 
-        'inner join materia m on m.idmateria = am.idmateria'
+        'inner join aluno a on a.idaluno = am.idaluno '.
+        'inner join materia m on m.idmateria = am.idmateria '.
+        'order by am.idalunomatriculado asc'
     );
 }
 

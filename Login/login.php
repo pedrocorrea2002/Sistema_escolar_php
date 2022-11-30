@@ -26,6 +26,7 @@
         else return false;
     }
 
+    //? VERIFICA SE O USUÁRIO ESTÁ LOGADO
     function revalidarLogin(){
         session_name(md5($_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']));
         session_start();
@@ -92,6 +93,14 @@
     function AtualizarSenha($dslogin, $senhaMD5){
         $sql = 'update login ' .
                " set dssenha = '$senhaMD5'" . 
+               " where dslogin = '$dslogin'";
+
+        return updateRegistro($sql);
+    }
+
+    function AtualizarAluno($dslogin, $idaluno){
+        $sql = 'update login '.
+               " set idaluno = $idaluno".
                " where dslogin = '$dslogin'";
 
         return updateRegistro($sql);

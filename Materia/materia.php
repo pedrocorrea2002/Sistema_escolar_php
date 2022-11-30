@@ -14,7 +14,7 @@ function selecionaMateria($nome)
 
 function listaMateria()
 {
-    return selectRegistros("select * from materia");
+    return selectRegistros("select * from materia order by idmateria");
 }
 
 function existeMateria($nome)

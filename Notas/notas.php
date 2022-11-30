@@ -14,7 +14,7 @@ function selecionanotas($nome)
 
 function listanotas()
 {
-    return selectRegistros("select * from avaliacaoaluno");
+    return selectRegistros("select * from avaliacaoaluno order by idavaliacaoaluno");
 }
 
 function existenotas($nome)

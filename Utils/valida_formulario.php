@@ -58,7 +58,6 @@ function membroValido($valor, $tipo)
             return "1";
     }
 
-
     return "1";
 }
 
