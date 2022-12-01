@@ -1,22 +1,30 @@
-<?php require("../Componente/header.php") ?>
+<?php 
+require_once("../Componente/header.php");
+require_once("../Materia/materia.php");
+require_once("avaliacao.php");
+
+    //$avaliacoes = listaAvaliacoes();
+    $materias = listaMateria()   
+ ?>
 
 <body>
     <?php
-    require("../Componente/menu.php");
-    require_once("avaliacao.php");
+    require("../Componente/menu.php");    
     ?>
 
     <div class="content">
         <h2>Cadastro de Avaliações	</h2><hr/>
-        <form action="proc_ins_avaliacao.php" method="POST">
-            <label>Avaliações: <input type="text" name="cadavaliacao" size="30" maxsize="30" /></label>
-            
+        <form action="../Avaliacao/proc_ins_avaliacao.php" method="POST">
+            <label>
+                Avaliações: 
+                <input type="text" name="cadAvaliacao" size="30" maxsize="30" />
+            </label>            
             <label>
                 Matéria:
-                <select name="idAvaliacao">
-                    <?php foreach($avaliacoes as $avaliacao){?>
-                        <option value="<?php echo $avaliacao["idavaliacao"] ?>">
-                            <?php echo $avaliacao["dsavaliacao"] ?>
+                <select name="CadMateria">
+                    <?php foreach($materias as $materia){?>
+                        <option value="<?php echo $materia["idmateria"] ?>">
+                            <?php echo $materia["dsmateria"] ?>
                         </option>
                     <?php } ?>
                 </select>
@@ -43,7 +51,7 @@
             echo "<tr>" .
                     "<td>" . $registro['idavaliacao'] . "</td>" .
                     "<td>" . $registro['dsavaliacao'] . "</td>" .
-                    "<td>" . $registro['dsmateria'] . "</td>" .
+                    "<td>" . $registro['dsavaliacao'] . "</td>" .
                     "<td>" .
                     '<form action="form_upd_avaliacao.php" method="POST">' .
                     '<input type="hidden" value="' . $registro['dsavaliacao'] .  '" name="dsavaliacao" />' .
@@ -56,7 +64,22 @@
                     '<input type="submit" value="X">' .
                     "</form>" .
                     "</td>" .
-                    "</tr>";            
+                    "</tr>";     
+                    
+                    
+                    foreach ($avaliacoes as $avalia) {
+                        echo '<tr>' .
+                             '  <td><a href=../Matricula/form_matricula.php?alterarid=' . $avalia['idalunomatriculado'] . '>' . $avalia['idalunomatriculado'] . '</a></td>' .
+                             '  <td>' . $avalia['nmaluno'] . '</td>' .
+                             '  <td>' . $avalia['dsmateria'] . '</td>' .
+                             '  <td>' .
+                                '  <form action="../Matricula/proc_del_matricula.php" method="POST">' .
+                                '      <input type="hidden" name="idmatriculaDEL" value="' . $avalia['idalunomatriculado'] . '" />' .
+                                '      <input type="submit" value="Excluir" />' .
+                                '  </form>' .
+                                '</td>' .
+                             '</tr>';
+                    }
         }
         ?>
 
@@ -89,6 +112,16 @@
         <?php
         if (isset($_GET['alterarid'])) {
             echo '<form action="proc_upd_avaliacao.php" method="POST">';
+
+            //? PREENCHENDO ComboBox DE MATERIA COM A MATERIA DO REGISTRO SELECIONADO
+            echo '<label> Matéria: <select name="idmateria">';
+                foreach($materias as $materia){
+                    echo '<option value="'.$materia["idmateria"].'"';
+                    if(getMatricula($_GET['alterarid'])[0]['idmateria'] == $materia['idmateria']){echo 'selected';}
+                    echo '>'.$materia["dsmateria"].'</option>';
+                }
+            echo '</select></label>';
+
             echo '    <input type="text" name="dsavaliacao" value=" ' . getNameavaliacao($_GET['alterarid']) . ' " />';
             echo '    <input type="hidden" name="idavaliacaoUPD" value="' . $_GET['alterarid'] . '" />';
             echo '    <input type="submit" value="alterar" />';

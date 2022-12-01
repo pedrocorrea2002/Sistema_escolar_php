@@ -1,10 +1,10 @@
 <?php
 require_once("../Utils/mysql.php");
 
-$sqlSelect = "select * from materia where lower(dsmateria) like '%";
-$novaMateria = "insert into materia(dsmateria) values ('@')";
+$sqlSelect = "select * from avaliacao where lower(dsavaliacao) like '%";
+$novaavaliacao = "insert into avaliacao(dsavaliacao) values ('@')";
 
-function selecionaMateria($nome)
+function selecionaavaliacao($nome)
 {
     global $sqlSelect;
     $sql = $sqlSelect . strtolower($nome) . "%'";
@@ -14,24 +14,24 @@ function selecionaMateria($nome)
 
 function listaAvaliacoes()
 {
-    $sqlAvaliacao = "SELECT a.idavaliacao, a.dsavaliacao, m.dsmateria FROM avaliacao a ".
-                         "INNER JOIN materia m ON m.dsmateria = m.idmateria ".                          
+    $sqlAvaliacao = "SELECT a.idavaliacao, a.dsavaliacao, m.dsavaliacao FROM avaliacao a ".
+                         "INNER JOIN avaliacao m ON m.dsavaliacao = m.idavaliacao ".                          
                          "ORDER BY a.idavaliacao";    
     return selectRegistros($sqlAvaliacao);
     
 }
 
-function existeMateria($nome)
+function existeavaliacao($nome)
 {
-    $retorno = selectRegistros("select * from materia where lower(dsmateria)='" . strtolower($nome) . "'");
+    $retorno = selectRegistros("select * from avaliacao where lower(dsavaliacao)='" . strtolower($nome) . "'");
 
     if (count($retorno) > 0) return true;
     else return false;
 }
-function cadastrarMateria($nome)
+function cadastraravaliacao($nome)
 {
-    global $novaMateria;
-    $sql = str_replace("@",$nome,$novaMateria);
+    global $novaavaliacao;
+    $sql = str_replace("@",$nome,$novaavaliacao);
 
     return insereRegistro($sql);
 }
@@ -45,14 +45,14 @@ function getAvaliacao($id)
 
 function setAvaliacao($id, $nome)
 {
-    $sql = "UPDATE MATERIA SET dsmateria='" . $nome . "' WHERE idmateria=" . $id;
+    $sql = "UPDATE avaliacao SET dsavaliacao='" . $nome . "' WHERE idavaliacao=" . $id;
 
     return updateRegistro($sql);
 }
 
-function deleteMateria($id)
+function deleteavaliacao($id)
 {
-    $sql = "DELETE FROM MATERIA  WHERE idmateria=" . $id;   
+    $sql = "DELETE FROM avaliacao  WHERE idavaliacao=" . $id;   
 
     return deleteRegistro($sql);
 }
