@@ -10,6 +10,7 @@ require_once("../Login/login.php");
     <form action="proc_ins_acesso.php" method="POST">
         <label>Usuário: <input type="text" name=dslogin> </label>
         <label>Senha: <input type="password" name=dssenha> </label>
+        <label>Repita a senha: <input type="password" name=dsrepita> </label>
         <select name="idaluno">
             <option selected></option>
 
@@ -23,6 +24,16 @@ require_once("../Login/login.php");
         </select>
         <input type="submit" value="cadastrar">
     </form>
+
+    <?php
+        if(isset($_POST['msg_acesso']) && isset($_POST['status_acesso'])){
+            if($_POST['status_acesso'] == 0){
+                echo "<p style='color:green; font-weight:bolder'>Acesso inserido com sucesso!</p>";
+            }else{
+                echo "<p style='color:red; font-weight:bolder'>".$_POST['msg_acesso']."</p>";
+            }
+        }
+    ?>
 
     <hr />
 

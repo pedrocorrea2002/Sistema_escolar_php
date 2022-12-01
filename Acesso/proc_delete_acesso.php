@@ -1,5 +1,5 @@
 <?php
-include("../Login/login.php");
+require_once("../Login/login.php");
 
 if(isset($_POST['dslogin']))
 {

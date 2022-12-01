@@ -1,18 +1,28 @@
 <?php
 require_once("../Login/login.php");
 require_once("../Aluno/aluno.php");
+require_once("../Utils/valida_formulario.php");
 
 $msg_aluno = "";
 $status_aluno = 0; //! 0 - EXECUTADO, 1 - ERRO ENCONTRADO
 
 if(isset($_POST['dslogin']) && isset($_POST['idaluno'])){
-    $dslogin = $_POST['dslogin'];
+    $dslogin = trim($_POST['dslogin']);
     $idaluno = $_POST['idaluno'];
 
+    //* VERIFICANDO A PRESENÇA DE CÓDIGO MALICIOSO DENTRO DO dslogin
+    if(caracteresInvalidos($dslogin)){
+        $msg_aluno = $msg_aluno."Usuário inválido!<br>";
+        $status_aluno = 1;
+    }
+
+    //* VERIFICANDO SE O idaluno É NÚMERO
     if(!is_numeric($idaluno)){
         $msg_aluno = $msg_aluno."Aluno inválido!<br>";
         $status_aluno = 1;
     }
+
+    //* VERIFICANDO SE O USUÁRIO ESTÁ LOGADO
     if(!revalidarLogin()){
         $msg_aluno = $msg_aluno."Você não tem permissão para alterar essa informação, tente novamente! <br>";
         $status_aluno = 1;
@@ -26,6 +36,7 @@ if(isset($_POST['dslogin']) && isset($_POST['idaluno'])){
         $status_aluno = 1;
     }
 
+    //* ALTERANDO
     if($msg_aluno == ""){
         $status_aluno = AtualizarAluno($dslogin,$idaluno);
     }

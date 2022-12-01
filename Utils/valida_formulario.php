@@ -25,6 +25,9 @@ function caracteresInvalidos($valor)
     if (strstr($valor, '>')) return true;
     if (strstr($valor, '<')) return true;
     if (strstr($valor, '--')) return true;
+    if (strstr($valor, '/')) return true;
+    if (strstr($valor, '*')) return true;
+    if (strstr($valor, '=')) return true;
 
     return false;
 }

@@ -16,7 +16,7 @@
  
         <p>
         <?php 
-        $logins = listarLogins();
+        $logins = ListarLogins();
         
         echo "<table>" .
             "<thead>" .

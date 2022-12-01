@@ -1,9 +1,7 @@
 <?php
-require_once("../Componente/header.php");
 require_once("notas.php");
 require_once("../Avaliacao/avaliacao.php");
 require_once("../Aluno/aluno.php");
-require_once("../Utils/valida_formulario.php");
 
 $msg_nota = "";
 $status_nota = 0; //! 0 - EXECUTADO, 1 - ERRO ENCONTRADO

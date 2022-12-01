@@ -26,7 +26,7 @@
         else return false;
     }
 
-    //? VERIFICA SE O USUÁRIO ESTÁ LOGADO
+    //* VERIFICA SE O USUÁRIO ESTÁ LOGADO
     function revalidarLogin(){
         session_name(md5($_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']));
         session_start();
@@ -60,7 +60,7 @@
         else return true;
     }
 
-    function listarLogins(){
+    function ListarLogins(){
         return selectRegistros("select * from login");
     }
 
