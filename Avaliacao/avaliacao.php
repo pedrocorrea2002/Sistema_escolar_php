@@ -32,14 +32,14 @@ function cadastrarMateria($nome)
     return insereRegistro($sql);
 }
 
-function getNameAvaliacao($id)
+function getAvaliacao($id)
 {
     $retorno = selectRegistros("select * from avaliacao where idavaliacao='" . $id . "'");
 
-    return $retorno[0]['dsavaliacao'];
+    return $retorno[0];
 }
 
-function setNameMateria($id, $nome)
+function setAvaliacao($id, $nome)
 {
     $sql = "UPDATE MATERIA SET dsmateria='" . $nome . "' WHERE idmateria=" . $id;
 

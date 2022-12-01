@@ -1,5 +1,6 @@
 <?php
 require_once("../Login/login.php");
+require_once("../Aluno/aluno.php");
 
 $msg_aluno = "";
 $status_aluno = 0; //! 0 - EXECUTADO, 1 - ERRO ENCONTRADO
@@ -16,8 +17,17 @@ if(isset($_POST['dslogin']) && isset($_POST['idaluno'])){
         $msg_aluno = $msg_aluno."Você não tem permissão para alterar essa informação, tente novamente! <br>";
         $status_aluno = 1;
     }
+
+    //* VERIFICANDO SE O ALUNO ESCOLHIDO AINDA EXISTE
+    try{
+        getAluno($idaluno);
+    }catch(Exception $e){
+        $msg_aluno = $msg_aluno."Aluno não encontrado! <br>";
+        $status_aluno = 1;
+    }
+
     if($msg_aluno == ""){
-        $msg_aluno = AtualizarAluno($dslogin,$idaluno);
+        $status_aluno = AtualizarAluno($dslogin,$idaluno);
     }
 }
 

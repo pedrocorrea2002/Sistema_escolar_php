@@ -55,7 +55,7 @@
 
         foreach ($matriculas as $matricula) {
             echo '<tr>' .
-                 '  <td><a href=../Matricula/form_matricula.php?alterarid=' . $matricula['idalunomatriculado'] . '>' . $matricula['idalunomatriculado'] . '</a></td><br>' .
+                 '  <td><a href=../Matricula/form_matricula.php?alterarid=' . $matricula['idalunomatriculado'] . '>' . $matricula['idalunomatriculado'] . '</a></td>' .
                  '  <td>' . $matricula['nmaluno'] . '</td>' .
                  '  <td>' . $matricula['dsmateria'] . '</td>' .
                  '  <td>' .

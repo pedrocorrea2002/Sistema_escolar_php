@@ -28,7 +28,7 @@
 
         foreach ($alunos as $registro) {
             echo '    <tr>' .
-                '        <td><a href=form_aluno.php?alterarid=' . $registro['idaluno'] . '>' . $registro['idaluno'] . '</a></td><br>' .
+                '        <td><a href=form_aluno.php?alterarid=' . $registro['idaluno'] . '>' . $registro['idaluno'] . '</a></td>' .
                 '        <td>' . $registro['nmaluno'] . '</td>' .
                 ' <td>' .
                 '<form action="proc_del_aluno.php" method="POST">' .
@@ -68,9 +68,9 @@
         <?php
         if (isset($_GET['alterarid'])) {
             echo '<form action="proc_upd_aluno.php" method="POST">';
-            echo '    <input type="text" name="nmaluno" value=" ' . getName($_GET['alterarid']) . ' " />';
+            echo '    <input type="text" name="nmaluno" value=" ' . getAluno($_GET['alterarid'])['nmaluno'] . ' " />';
             echo '    <input type="hidden" name="idalunoUPD" value="' . $_GET['alterarid'] . '" />';
-            echo '    <input type="submit" value="alterar" />';
+            echo '    <input type="submit" value="Alterar" />';
             echo '</form>';
         }
         ?>

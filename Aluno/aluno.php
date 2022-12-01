@@ -32,11 +32,11 @@ function cadastrarAluno($nome)
     return insereRegistro($sql);
 }
 
-function getNameAluno($id)
+function getAluno($id)
 {
     $retorno = selectRegistros("select * from aluno where idaluno='" . $id . "'");
 
-    return $retorno[0]['nmaluno'];
+    return $retorno[0];
 }
 
 function setNameAluno($id, $nome)

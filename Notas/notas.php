@@ -42,23 +42,23 @@ function cadastrarnotas($idAluno, $idavaliacao, $nota)
     return insereRegistro($sql);
 }
 
-function getNamenotas($id)
+function getNotas($id)
 {
-    $retorno = selectRegistros("select * from avaliacaoaluno where notas='" . $id . "'");
+    $retorno = selectRegistros("select * from avaliacaoaluno where idavaliacaoaluno = $id");
 
-    return $retorno[0]['dsnotas'];
+    return $retorno[0];
 }
 
-function setNamenotas($id, $nome)
+function setNotas($id, $idaluno, $idavaliacao, $nota)
 {
-    $sql = "UPDATE avaliacaoaluno SET dsnotas='" . $nome . "' WHERE idnotas=" . $id;
+    $sql = "UPDATE avaliacaoaluno SET idaluno = $idaluno, idavaliacao = $idavaliacao, nota = $nota WHERE idavaliacaoaluno = $id";
 
     return updateRegistro($sql);
 }
 
-function deletenotas($id)
+function deletenota($id)
 {
-    $sql = "DELETE FROM avaliacaoaluno  WHERE idnotas=" . $id;   
+    $sql = "DELETE FROM avaliacaoaluno WHERE idavaliacaoaluno = $id";
 
     return deleteRegistro($sql);
 }

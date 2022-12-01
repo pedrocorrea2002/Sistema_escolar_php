@@ -7,12 +7,13 @@
     ?>
 
     <div class="content">
-        <h2>Cadastro de matérias</h2><hr/>
+        <h2>Cadastro de matérias</h2>
+        <hr />
         <form action="proc_ins_materia.php" method="POST">
             <label>Materia a cadastrar: <input type="text" name="cadMateria" size="30" maxsize="30" /></label>
             <input type="submit" value="Cadastrar" />
         </form>
-        <hr/>
+        <hr />
         <?php
         $materia = listaMateria();
 
@@ -20,14 +21,14 @@
             "<thead>" .
             "<tr>" .
             "<th>Identificação</th>" .
-            "<th>Nome:</th>" .            
+            "<th>Nome:</th>" .
             "</tr>" .
             "</thead>" .
             "<tbody> ";
 
         foreach ($materia as $registro) {
             echo '    <tr>' .
-                '        <td><a href=form_materia.php?alterarid=' . $registro['idmateria'] . '>' . $registro['idmateria'] . '</a></td><br>' .
+                '        <td><a href=form_materia.php?alterarid=' . $registro['idmateria'] . '>' . $registro['idmateria'] . '</a></td>' .
                 '        <td>' . $registro['dsmateria'] . '</td>' .
                 ' <td>' .
                 '<form action="proc_del_materia.php" method="POST">' .

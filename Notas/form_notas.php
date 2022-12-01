@@ -39,7 +39,7 @@
             </label>
             <label>
                 Nota: 
-                <input type="number" name=dsnota>
+                <input type="number" name=nota>
             </label>
             <input type="submit" value="Cadastrar" />
         </form>
@@ -69,7 +69,7 @@
             
             foreach ($notas as $nota) {
                 echo '<tr>' .
-                    ' <td><a href=form_notas.php?alterarid=' . $nota['idavaliacaoaluno'] . '>' . $nota['idavaliacaoaluno'] . '</a></td><br>' .
+                    ' <td><a href=form_notas.php?alterarid=' . $nota['idavaliacaoaluno'] . '>' . $nota['idavaliacaoaluno'] . '</a></td>' .
                     ' <td>' . $nota['nmaluno'] . '</td>' .
                     ' <td>' . $nota['dsavaliacao'] . '</td>' .
                     ' <td>' . $nota['nota'] . '</td>' .
@@ -85,7 +85,7 @@
 
         <tfoot>
             <tr>
-                <td colspan="3">
+                <td colspan="5">
                     <?php
                     if (isset($_GET['upd'])) echo "Registro alterado";
                     if (isset($_GET['del'])) {
@@ -103,7 +103,6 @@
                                 echo "comando inválido";
                         }
                     }
-
                     ?>
                 </td>
             </tr>
@@ -115,26 +114,38 @@
             echo '<form action="../Notas/proc_upd_notas.php" method="POST">';
 
             // PREENCHENDO ComboBox DE ALUNO COM O ALUNO DO REGISTRO SELECIONADO
-            echo '<label style="margin-right:20px"> Aluno: <select name="idaluno">';
+            echo '  <label style="margin-right:20px"> Aluno: <select name="idaluno">';
                 foreach($alunos as $aluno){
                     echo '<option value="'.$aluno["idaluno"].'"';
-                    if(getMatricula($_GET['alterarid'])[0]['idaluno'] == $aluno['idaluno']){echo 'selected';}
+                    if(getNotas($_GET['alterarid'])['idaluno'] == $aluno['idaluno']){echo 'selected';}
                     echo'>'.$aluno["nmaluno"].'</option>';
                 }
-            echo '</select></label>';
+            echo '  </select></label>';
 
-            // PREENCHENDO ComboBox DE MATERIA COM A MATERIA DO REGISTRO SELECIONADO
-            echo '<label> Matéria: <select name="idmateria">';
-                foreach($materias as $materia){
-                    echo '<option value="'.$materia["idmateria"].'"';
-                    if(getMatricula($_GET['alterarid'])[0]['idmateria'] == $materia['idmateria']){echo 'selected';}
-                    echo '>'.$materia["dsmateria"].'</option>';
+            // PREENCHENDO ComboBox DE AVALIAÇÃO COM A AVALIAÇÃO DO REGISTRO SELECIONADO
+            echo '  <label style="margin-right:20px"> Avaliação: <select name="idavaliacao">';
+                foreach($avaliacoes as $avaliacao){
+                    echo '<option value="'.$avaliacao["idavaliacao"].'"';
+                    if(getNotas($_GET['alterarid'])['idavaliacao'] == $avaliacao['idavaliacao']){echo 'selected';}
+                    echo '>'.$avaliacao["dsavaliacao"].'</option>';
                 }
-            echo '</select></label>';
+            echo '  </select></label>';
 
-            echo '    <input type="hidden" name="idmatricula" value="' . $_GET['alterarid'] . '" />';
-            echo '    <input type="submit" value="alterar" />';
+            echo '  <label>Nota:'; 
+            echo '  <input name="nota" value="'.getNotas($_GET['alterarid'])['nota'].'" />';
+            echo '  </label>';
+
+            echo '  <input type="hidden" name="idavaliacaoaluno" value="'.$_GET['alterarid'].'" />';
+            echo '  <input type="submit" value="Alterar" />';
             echo '</form>';
+        }
+
+        if(isset($_POST['msg_nota_upd']) && isset($_POST['status_nota_upd'])){
+            if($_POST['status_nota_upd'] == 0){
+                echo "<p style='color:green; font-weight:bolder'>Nota alterada com sucesso!</p>";
+            }else{
+                echo "<p style='color:red; font-weight:bolder'>".$_POST['msg_nota_upd']."</p>";
+            }
         }
         ?>
     </div>
