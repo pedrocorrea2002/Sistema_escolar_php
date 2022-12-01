@@ -14,7 +14,11 @@ function selecionaMateria($nome)
 
 function listaAvaliacoes()
 {
-    return selectRegistros("select * from avaliacao order by idavaliacao");
+    $sqlAvaliacao = "SELECT a.idavaliacao, a.dsavaliacao, m.dsmateria FROM avaliacao a ".
+                         "INNER JOIN materia m ON m.dsmateria = m.idmateria ".                          
+                         "ORDER BY a.idavaliacao";    
+    return selectRegistros($sqlAvaliacao);
+    
 }
 
 function existeMateria($nome)
