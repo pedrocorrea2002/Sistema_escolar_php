@@ -122,7 +122,7 @@ require_once("avaliacao.php");
                 }
             echo '</select></label>';
 
-            echo '    <input type="text" name="dsavaliacao" value=" ' . getNameavaliacao($_GET['alterarid']) . ' " />';
+            echo '    <input type="text" name="dsavaliacao" value=" ' . getAvaliacao($_GET['alterarid'])['dsavaliacao'] . ' " />';
             echo '    <input type="hidden" name="idavaliacaoUPD" value="' . $_GET['alterarid'] . '" />';
             echo '    <input type="submit" value="alterar" />';
             echo '</form>';
