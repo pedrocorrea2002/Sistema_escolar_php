@@ -1,21 +1,40 @@
-<?php require_once("../Componente/header.php") ?>
+<?php 
+require_once("../Componente/header.php");
+require_once("../Componente/menu.php");
+require_once("aluno.php");
+
+$alunos = [];
+$filter = "";
+
+//* SE HOUVER FILTRO $alunos VIRÁ FILTRADO, SERÃO VIRÁ COMPLETO
+if(isset($_GET['filter'])){
+    $filter = $_GET['filter'];
+    $alunos = searchAlunosByName($filter);
+}else{
+    $alunos = listaAlunos();
+}
+
+?>
 
 <body>
-    <?php
-    require_once("../Componente/menu.php");
-    require_once("aluno.php");
-    ?>
-
     <div class="content">
         <h2>Manutenção de alunos</h2><hr/>
+        <!-- FORM DE PESQUISA -->
+        <form method="POST" action="./proc_src_aluno">
+            <label>
+                Pesquisar aluno:
+                <input type="text" name="srcAluno" value="<?php echo $filter ?>"/>
+                <input type="submit" value="Pesquisar">
+            </label>
+        </form>
+        <hr>
+        <!-- FORM DE CADASTRO -->
         <form action="proc_ins_aluno.php" method="POST">
             <label>Aluno a cadastrar: <input type="text" name="cadAluno" size="30" maxsize="30" /></label>
             <input type="submit" value="Cadastrar" />
         </form>
         <hr/>
         <?php
-        $alunos = listaAlunos();
-
         echo "<table>" .
             "<thead>" .
             "<tr>" .
@@ -32,7 +51,7 @@
                 '        <td>' . $registro['nmaluno'] . '</td>' .
                 ' <td>' .
                 '<form action="proc_del_aluno.php" method="POST">' .
-                '    <input type="hidden" name="idalunoDEL" value="' . $registro['idaluno'] . '" />' .
+                '    <input type="hidden" name="idalunoDEL" value="' . $registro['idaluno'] . '"/>' .
                 '    <input type="submit" value="Excluir" />' .
                 '</form>' .
                 '    </tr>';
