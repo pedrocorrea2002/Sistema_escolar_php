@@ -1,4 +1,18 @@
-<?php require("../Componente/header.php") ?>
+<?php require("../Componente/header.php") ;
+require_once("materia.php");
+
+$materias = [];
+$filter = "";
+
+//* SE HOUVER FILTRO $alunos VIRÁ FILTRADO, SERÃO VIRÁ COMPLETO
+if(isset($_GET['filter'])){
+    $filter = $_GET['filter'];
+    $materias = searchMateriasByName($filter);
+}else{
+    $materias = listaMateria();
+}
+
+?>
 
 <body>
     <?php
@@ -14,6 +28,17 @@
             <input type="submit" value="Cadastrar" />
         </form>
         <hr />
+
+        <!-- FORM DE PESQUISA -->
+        <form method="POST" action="./proc_src_materia">
+            <label>
+                Pesquisar matéria:
+                <input type="text" name="srcMateria" value="<?php echo $filter ?>"/>
+                <input type="submit" value="Pesquisar">
+            </label>
+        </form>
+        <hr>
+        
         <?php
         $materia = listaMateria();
 

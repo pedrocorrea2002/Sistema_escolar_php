@@ -53,4 +53,10 @@ function deleteMateria($id)
     return deleteRegistro($sql);
 }
 
+
+//* PESQUISA UMA LISTA DE ALUNO COM BASE NO NOME PASSADO
+function searchMateriasByName($name){
+    return selectRegistros("select * from materia where dsmateria like '%$name%'");
+}
+
 ?>
