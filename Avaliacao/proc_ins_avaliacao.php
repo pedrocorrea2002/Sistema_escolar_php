@@ -24,7 +24,7 @@ if (isset($_POST['idMateria']) && isset($_POST['dsAvaliacao'])) {
         $status_avaliacao = 1;
     }
 
-    if($msg_avaliacao = ""){
+    if($msg_avaliacao = !""){
         $msg_avalicao = cadastrarAvaliacao($dsAvaliacao, $idMateria);
     }
 }
