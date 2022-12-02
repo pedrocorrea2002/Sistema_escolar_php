@@ -1,11 +1,11 @@
-<?php require_once("../Componente/header.php") ?>
+<?php 
+require_once("../Componente/header.php");
+require_once("../Componente/menu.php");
+require_once("../Login/login.php");
+?>
 
 <body>
 <div class="content">
-    <?php 
-    require_once("../Componente/menu.php");
-    require_once("../Login/login.php");
-    ?>
     <h2>Atualizar dados do usuário</h2>
     <hr />
     <form action="proc_update_senha.php" method="POST">

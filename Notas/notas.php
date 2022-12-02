@@ -15,7 +15,7 @@ function selecionanotas($nome)
 
 function listanotas()
 {
-    $sqlAvaliacaoAluno = "SELECT aa.idavaliacaoaluno, av.dsavaliacao, al.nmaluno, aa.nota FROM avaliacaoaluno aa ".
+    $sqlAvaliacaoAluno = "SELECT aa.idavaliacaoaluno, av.dsavaliacao, al.nmaluno, aa.nota, aa.idavaliacao FROM avaliacaoaluno aa ".
                          "INNER JOIN avaliacao av ON av.idavaliacao = aa.idavaliacao ".
                          "INNER JOIN aluno al ON al.idaluno = aa.idaluno ". 
                          "ORDER BY aa.idavaliacaoaluno";
@@ -36,8 +36,6 @@ function cadastrarnotas($idAluno, $idavaliacao, $nota)
     $sql = str_replace('@idaluno', $idAluno, $novanotas);
     $sql = str_replace('@idavaliacao', $idavaliacao, $sql);
     $sql = str_replace('@nota', $nota, $sql);
-
-    echo "aqui: $sql";
 
     return insereRegistro($sql);
 }

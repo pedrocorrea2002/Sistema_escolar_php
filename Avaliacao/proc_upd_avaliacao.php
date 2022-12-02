@@ -9,7 +9,9 @@
         }else{
             $id = trim($_POST['idavaliacaoUPD']);
             $nome = trim($_POST['dsavaliacao']);
+            
             setName($id, $nome);
+            
             header("Location: form_avaliacao.php?upd=1");
         }
     }
