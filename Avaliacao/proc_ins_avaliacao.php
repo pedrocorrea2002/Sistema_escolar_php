@@ -24,8 +24,20 @@ if (isset($_POST['idMateria']) && isset($_POST['dsAvaliacao'])) {
         $status_avaliacao = 1;
     }
 
-    cadastrarAvaliacao($dsAvaliacao, $idMateria);
-    header('Location: form_avaliacao.php');
+    if($msg_avaliacao = ""){
+        $msg_avalicao = cadastrarAvaliacao($dsAvaliacao, $idMateria);
+    }
 }
+
+//* RETORNANDO RESPOSTA PARA O FORMULÁRIO
+echo "<form id='form' action='form_avaliacao.php' method='POST'>".
+        // "<input type='hidden' value='$dslogin' name='dslogin' />".
+        "<input type='hidden' value='$msg_avaliacao' name='msg_avaliacao' />".
+        "<input type='hidden' value='$status_avaliacao' name='status_avaliacao' />".
+      "</form>";
+
+echo "<script>".
+        "document.getElementById('form').submit()".
+      "</script>";
 
 ?>

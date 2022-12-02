@@ -43,8 +43,8 @@ function getAvaliacao($id){
 }
 
 //* ATUALIZA AVALIAÇÃO
-function upAvaliacao($id, $dsavaliacao, $idmateria){
-    $sql = "UPDATE avaliacao SET idmateria='" . $idmateria . "', dsavaliacao='" . $nome . "', WHERE idavaliacao=" . $id;
+function updAvaliacao($id, $dsavaliacao, $idmateria){
+    $sql = "UPDATE avaliacao SET dsavaliacao = '$dsavaliacao', idmateria = $idmateria WHERE idavaliacao = $id";
 
     return updateRegistro($sql);
 }

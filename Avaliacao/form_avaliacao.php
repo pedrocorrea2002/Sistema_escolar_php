@@ -32,7 +32,17 @@ require_once("../Componente/menu.php");
             </label>
 
             <input type="submit" value="Cadastrar" />
-        </form>        
+        </form>
+        
+        <?php
+            if(isset($_POST['msg_avaliacao']) && isset($_POST['status_avaliacao'])){
+                if($_POST['status_avaliacao'] == 0){
+                    echo "<p style='color:green; font-weight:bolder'>Avaliação criada com sucesso!</p>";
+                }else{
+                    echo "<p style='color:red; font-weight:bolder'>".$_POST['msg_avaliacao']."</p>";
+                }
+            }
+        ?>
 
         <table style="border: 1px; border-color:black;">
         <thead>
@@ -83,7 +93,7 @@ require_once("../Componente/menu.php");
                         }
                     }
 
-                    ?></td>
+                ?></td>
             </tr>
         </tfoot>
         </table>
@@ -93,7 +103,7 @@ require_once("../Componente/menu.php");
             echo '<form action="proc_upd_avaliacao.php" method="POST">';
 
             //? PREENCHENDO ComboBox DE MATERIA COM A MATERIA DO REGISTRO SELECIONADO
-            echo '<label> Matéria: <select name="idmateria">';
+            echo '<label> Matéria: <select name="idMateria">';
                 foreach($materias as $materia){
                     echo '<option value="'.$materia["idmateria"].'"';
                     if(getAvaliacao($_GET['alterarid'])['idmateria'] == $materia['idmateria']){echo 'selected';}
@@ -101,13 +111,20 @@ require_once("../Componente/menu.php");
                 }
             echo '</select></label>';
 
-            echo '    <input type="text" name="dsavaliacao" value=" ' . getAvaliacao($_GET['alterarid'])['dsavaliacao'] . ' " />';
-            echo '    <input type="hidden" name="idavaliacaoUPD" value="' . $_GET['alterarid'] . '" />';
+            echo '    <input type="text" name="dsAvaliacao" value=" ' . getAvaliacao($_GET['alterarid'])['dsavaliacao'] . ' " />';
+            echo '    <input type="hidden" name="idAvaliacaoUPD" value="' . $_GET['alterarid'] . '" />';
             echo '    <input type="submit" value="Alterar" />';
             echo '</form>';
         }
-        ?>     
-        
+
+        if(isset($_POST['msg_avaliacao_upd']) && isset($_POST['status_avaliacao_upd'])){
+            if($_POST['status_avaliacao_upd'] == 0){
+                echo "<p style='color:green; font-weight:bolder'>Avaliação alterada com sucesso!</p>";
+            }else{
+                echo "<p style='color:red; font-weight:bolder'>".$_POST['msg_avaliacao_upd']."</p>";
+            }
+        }
+        ?>
     </div>
 </body>
 </html>
