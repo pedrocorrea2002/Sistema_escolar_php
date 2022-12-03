@@ -11,6 +11,13 @@ function selecionaavaliacao($nome){
     return selectRegistros($sql);
 }
 
+// Restorna Select da tabela TIpo avaliacao
+function ListaAv()
+{
+    $sqlAv = "Select * From tipoavaliacao";
+    return selectRegistros($sqlAv);
+}
+
 //* RETORNA UMA LISTA DE AVALIAÇÕES
 function listaAvaliacoes(){
     $sqlAvaliacao = "SELECT A.idavaliacao, A.dsavaliacao, M.dsmateria FROM avaliacao A ".

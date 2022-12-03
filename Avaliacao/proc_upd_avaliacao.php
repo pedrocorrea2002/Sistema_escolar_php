@@ -26,7 +26,7 @@ if (isset($_POST['idAvaliacaoUPD']) && isset($_POST['dsAvaliacao']) && isset($_P
         $status_avaliacao = 1;
     }
 
-    if($msg_avaliacao = !""){
+    if($msg_avaliacao != ""){
         $msg_avaliacao = updAvaliacao($idAvaliacao, $dsAvaliacao, $idMateria);
     }
 }
