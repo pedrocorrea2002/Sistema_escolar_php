@@ -7,7 +7,8 @@ require_once("../Componente/menu.php");
 $materias = listaMateria();   
 $avaliacoes = [];
 $filter = "";
-
+$tipoAv= ListaAv();
+ 
 //* SE HOUVER FILTRO $alunos, VIRÁ FILTRADO, SERÃO VIRÁ COMPLETO
 if(isset($_GET['filter'])){
 $filter = $_GET['filter'];
@@ -31,14 +32,18 @@ $filter = $_GET['filter'];
         </form>
         <hr>
         <!-- FORM DE CADASTRO -->
-        <form action="../Avaliacao/proc_ins_avaliacao.php" method="POST">            
-            <label>
+        <form action="../Avaliacao/proc_ins_avaliacao.php" method="POST">     
+
+            <label name="lblAvaliacao">
                 Avaliações:                 
                 <select name="dsAvaliacao">
-                    <option value="av1">Avaliacao 1</option>
-                    <option value="av2">Avaliacao 2</option>
-                    <option value="av3">Avaliacao 3</option>
-                </select>   
+                    <?php foreach($tipoAv as $tipoavaliacao){?>
+                        <option value="<?php echo $tipoavaliacao["tipoAv"] ?>">
+                            <?php echo $tipoavaliacao["tipoAv"] ?>
+                        </option>
+                    <?php } ?>
+                </select>
+                
             </label>  
             <label>
                 Matéria:
@@ -130,12 +135,22 @@ $filter = $_GET['filter'];
                 }
             echo '</select></label>';
 
-            echo '    <input type="text" name="dsAvaliacao" value=" ' . getAvaliacao($_GET['alterarid'])['dsavaliacao'] . ' " />';
-            echo '    <input type="hidden" name="idAvaliacaoUPD" value="' . $_GET['alterarid'] . '" />';
-            echo '    <input type="submit" value="Alterar" />';
-            echo '</form>';
-        }
+// ----------------------------------------------------------------------------------
+            //? PREENCHENDO ComboBox DE AVALIACOES COM A AVALIACAO DO REGISTRO SELECIONADO
+            echo '<label> Avaliacoes: <select name="dsAvaliacao">';
+                foreach($tipoAv as $avaliacao){
+                    echo '<option value="'.$avaliacao["tipoAv"].'"';
+                    if(getAvaliacao($_GET['alterarid'])['idavaliacao'] == $avaliacao['tipoAv']){echo 'selected';}
+                    echo '>'.$avaliacao["tipoAv"].'</option>';
+                }
+            echo '    <input type="hidden" name="idAvaliacaoUPD" value="' . $_GET['alterarid'] . '" />';                
+            echo '</select></label>';
+            
 
+//-------------------------------------------------------------------------------
+            echo '    <input type="submit" value="Alterar" />';
+           // echo '</form>';
+        }
         if(isset($_POST['msg_avaliacao_upd']) && isset($_POST['status_avaliacao_upd'])){
             if($_POST['status_avaliacao_upd'] == 0){
                 echo "<p style='color:green; font-weight:bolder'>Avaliação alterada com sucesso!</p>";
