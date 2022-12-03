@@ -38,6 +38,17 @@ $filter = $_GET['filter'];
             <input type="submit" value="Cadastrar" />
         </form>
         <hr />
+
+        <!-- FORM DE PESQUISA -->
+        <form method="POST" action="./proc_src_materia">
+            <label>
+                Pesquisar matéria:
+                <input type="text" name="srcMateria" value="<?php echo $filter ?>"/>
+                <input type="submit" value="Pesquisar">
+            </label>
+        </form>
+        <hr>
+        
         <?php
         echo "<table>" .
             "<thead>" .
