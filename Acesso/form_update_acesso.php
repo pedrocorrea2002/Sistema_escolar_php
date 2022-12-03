@@ -42,9 +42,12 @@ require_once("../Login/login.php");
         <input type="submit" value="Atualizar">
 
         <?php
-            if(isset($_POST['msg_aluno']) && isset($_POST['status_aluno'])){
+            if(isset($_POST['msg_aluno']) && isset($_POST['status_aluno']) && isset($_POST['troca'])){
                 if($_POST['status_aluno'] == 0){
-                    echo "<p style='color:green; font-weight:bolder'>Aluno alterado com sucesso!</p>";
+                    $novo = explode(",",$_POST['troca'])[1];
+                    $velho = explode(",",$_POST['troca'])[0];
+
+                    echo "<p style='color:green; font-weight:bolder'>Aluno alterado com sucesso de <i>".$velho."</i> para <i>".$novo."</i>!</p>";
                 }else{
                     echo "<p style='color:red; font-weight:bolder'>".$_POST['msg_aluno']."</p>";
                 }

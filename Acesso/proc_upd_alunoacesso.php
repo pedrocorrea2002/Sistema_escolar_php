@@ -38,7 +38,14 @@ if(isset($_POST['dslogin']) && isset($_POST['idaluno'])){
 
     //* ALTERANDO
     if($msg_aluno == ""){
-        $status_aluno = AtualizarAluno($dslogin,$idaluno);
+        $troca = [
+            "velho" => getAluno(getLogin($dslogin)['idaluno'])['nmaluno'],
+            "novo" => getAluno($idaluno)['nmaluno']
+        ];
+
+        $troca = $troca["velho"].",".$troca["novo"];
+
+        $msg_aluno = AtualizarAluno($dslogin,$idaluno);
     }
 }
 
@@ -47,6 +54,7 @@ echo "<form id='form' action='form_update_acesso.php' method='POST'>".
         "<input type='hidden' value='$dslogin' name='dslogin' />".
         "<input type='hidden' value='$msg_aluno' name='msg_aluno' />".
         "<input type='hidden' value='$status_aluno' name='status_aluno' />".
+        "<input type='hidden' value='$troca' name='troca' />".
       "</form>";
 
 echo "<script>".

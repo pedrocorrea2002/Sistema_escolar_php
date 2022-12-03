@@ -119,4 +119,8 @@
 
         return selectRegistros($sql);
     }
+
+    function getLogin($dslogin){
+        return selectRegistros("select * from login where dslogin = '$dslogin'")[0];
+    }
 ?>

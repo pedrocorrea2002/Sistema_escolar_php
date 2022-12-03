@@ -39,7 +39,7 @@ function getNameMateria($id)
     return $retorno[0]['dsmateria'];
 }
 
-function setNameMateria($id, $nome)
+function setMateria($id, $nome)
 {
     $sql = "UPDATE MATERIA SET dsmateria='" . $nome . "' WHERE idmateria=" . $id;
 

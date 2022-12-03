@@ -12,7 +12,7 @@
             $id = trim($_POST['idalunoDEL']);
             if (liberarExclusao($id)){
                 if ($id != 1){
-                    delID($id);
+                    deleteAluno($id);
                     header("Location: form_aluno.php?del=1");
                 }else{
                     header("Location: form_aluno.php?del=2");

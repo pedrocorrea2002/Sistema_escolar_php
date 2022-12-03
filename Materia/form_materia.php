@@ -38,16 +38,6 @@ $filter = $_GET['filter'];
             <input type="submit" value="Cadastrar" />
         </form>
         <hr />
-
-        <!-- FORM DE PESQUISA -->
-        <form method="POST" action="./proc_src_materia">
-            <label>
-                Pesquisar matéria:
-                <input type="text" name="srcMateria" value="<?php echo $filter ?>"/>
-                <input type="submit" value="Pesquisar">
-            </label>
-        </form>
-        <hr>
         
         <?php
         echo "<table>" .
@@ -102,7 +92,7 @@ $filter = $_GET['filter'];
         if (isset($_GET['alterarid'])) {
             echo '<form action="proc_upd_materia.php" method="POST">';
             echo '    <input type="text" name="dsmateria" value=" ' . getNameMateria($_GET['alterarid']) . ' " />';
-            echo '    <input type="hidden" name="idmateriaUPD" value="' . $_GET['alterarid'] . '" />';
+            echo '    <input type="hidden" name="idMateriaUPD" value="' . $_GET['alterarid'] . '" />';
             echo '    <input type="submit" value="alterar" />';
             echo '</form>';
         }

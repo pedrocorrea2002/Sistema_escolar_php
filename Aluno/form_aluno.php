@@ -65,7 +65,7 @@ if(isset($_GET['filter'])){
                     if (isset($_GET['del'])) {
                         switch ($_GET['del']) {
                             case "0":
-                                echo "o registro não pode ser excluído";
+                                echo "o registro está em uso e não pode ser excluído";
                                 break;
                             case "1":
                                 echo "registro excluído";
