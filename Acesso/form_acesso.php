@@ -1,12 +1,32 @@
 <?php require_once("../Componente/header.php");
 require_once("../Componente/menu.php");
 require_once("../Login/login.php");
+
+$logins = [];
+$filter = "";
+
+//* SE HOUVER FILTRO $logins, VIRÁ FILTRADO, SERÃO VIRÁ COMPLETO
+if(isset($_GET['filter'])){
+    $filter = $_GET['filter'];
+    $logins = searchAcessosByUsuario($filter);
+}else{
+    $logins = ListarTodosLogin();
+}
 ?>
 
 <div class="content">
-    <h2>Manutenção de alunos </h2>
-    <hr />
-
+    <h2>Administração de acessos</h2>
+    <hr>
+        <!-- FORM DE PESQUISA -->
+        <form method="POST" action="./proc_src_acesso">
+            <label>
+                Pesquisar acesso:
+                <input type="text" name="srcAcesso" value="<?php echo $filter ?>"/>
+                <input type="submit" value="Pesquisar">
+            </label>
+        </form>
+        <hr>
+        <!-- FORM DE CADASTRO -->
     <form action="proc_ins_acesso.php" method="POST">
         <label>Usuário: <input type="text" name=dslogin> </label>
         <label>Senha: <input type="password" name=dssenha> </label>
@@ -48,8 +68,7 @@ require_once("../Login/login.php");
         <tbody>
             
             <?php
-            $listagem = ListarTodosLogin();
-            foreach ($listagem as $login) {
+            foreach ($logins as $login) {
                 echo "<tr>" .
                     "<td>" . $login['dslogin'] . "</td>" .
                     "<td>" . $login['dssenha'] . "</td>" .

@@ -105,4 +105,18 @@
 
         return updateRegistro($sql);
     }
+
+    //* PESQUISA UMA LISTA DE ACESSOS COM BASE NO NOME PASSADO
+    function searchAcessosByUsuario($dslogin){
+        $sql = "select l.dslogin," .
+                " l.dssenha," .
+                " l.idaluno," .
+                " a.nmaluno" .
+                " from login l," .
+                " aluno a" .
+                " where l.idaluno = a.idaluno and dslogin like '$dslogin%'";
+
+
+        return selectRegistros($sql);
+    }
 ?>

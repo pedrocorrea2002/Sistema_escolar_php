@@ -1,4 +1,18 @@
-<?php require("../Componente/header.php") ?>
+<?php 
+require_once("../Componente/header.php");
+require_once("materia.php");
+
+$materias = [];
+$filter = "";
+
+//* SE HOUVER FILTRO $alunos, VIRÁ FILTRADO, SERÃO VIRÁ COMPLETO
+if(isset($_GET['filter'])){
+$filter = $_GET['filter'];
+    $materias = searchMateriasByName($filter);
+}else{
+    $materias = listaMateria();
+}
+?>
 
 <body>
     <?php
@@ -7,16 +21,24 @@
     ?>
 
     <div class="content">
-        <h2>Cadastro de matérias</h2>
-        <hr />
+        <h2>Administração de matérias</h2>
+        <hr>
+        <!-- FORM DE PESQUISA -->
+        <form method="POST" action="./proc_src_materia">
+            <label>
+                Pesquisar matéria:
+                <input type="text" name="srcMateria" value="<?php echo $filter ?>"/>
+                <input type="submit" value="Pesquisar">
+            </label>
+        </form>
+        <hr>
+        <!-- FORM DE CADASTRO -->
         <form action="proc_ins_materia.php" method="POST">
             <label>Materia a cadastrar: <input type="text" name="cadMateria" size="30" maxsize="30" /></label>
             <input type="submit" value="Cadastrar" />
         </form>
         <hr />
         <?php
-        $materia = listaMateria();
-
         echo "<table>" .
             "<thead>" .
             "<tr>" .
@@ -26,13 +48,13 @@
             "</thead>" .
             "<tbody> ";
 
-        foreach ($materia as $registro) {
+        foreach ($materias as $materia) {
             echo '    <tr>' .
-                '        <td><a href=form_materia.php?alterarid=' . $registro['idmateria'] . '>' . $registro['idmateria'] . '</a></td>' .
-                '        <td>' . $registro['dsmateria'] . '</td>' .
+                '        <td><a href=form_materia.php?alterarid=' . $materia['idmateria'] . '>' . $materia['idmateria'] . '</a></td>' .
+                '        <td>' . $materia['dsmateria'] . '</td>' .
                 ' <td>' .
                 '<form action="proc_del_materia.php" method="POST">' .
-                '    <input type="hidden" name="idmateriaDEL" value="' . $registro['idmateria'] . '" />' .
+                '    <input type="hidden" name="idmateriaDEL" value="' . $materia['idmateria'] . '" />' .
                 '    <input type="submit" value="Excluir" />' .
                 '</form>' .
                 '    </tr>';

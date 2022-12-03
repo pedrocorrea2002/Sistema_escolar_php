@@ -56,4 +56,13 @@ function deleteavaliacao($id){
     return deleteRegistro($sql);
 }
 
+//* PESQUISA UMA LISTA DE AVALIAÇÃO COM BASE NO NOME PASSADO
+function searchAvaliacoesByName($name){
+    $sqlAvaliacao = "SELECT A.idavaliacao, A.dsavaliacao, M.dsmateria FROM avaliacao A ".
+    "INNER JOIN materia M ON M.idmateria = A.idmateria ".  # INNER JOIN outra_tabela ot ON ot.chave_estrangeira = tb.chave_estrangeira_equivalente                       
+    "where A.dsavaliacao like '$name%' ORDER BY A.idavaliacao";
+
+    return selectRegistros($sqlAvaliacao);
+}
+
 ?>

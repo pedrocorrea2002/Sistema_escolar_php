@@ -9,7 +9,7 @@
         }else{
             $id = trim($_POST['idalunoUPD']);
             $nome = trim($_POST['nmaluno']);
-            setName($id, $nome);
+            setAluno($id, $nome);
             header("Location: form_aluno.php?upd=1");
         }
     }

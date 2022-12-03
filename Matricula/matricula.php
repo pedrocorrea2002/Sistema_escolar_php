@@ -61,4 +61,14 @@ function deletaMatricula($id)
     return deleteRegistro($sql);
 }
 
+//* PESQUISA UMA LISTA DE MATRÍCULA COM BASE NO NOME DO ALUNO
+function searchMatriculasByName($name){
+    return selectRegistros(
+        'select * from alunomatriculado am '.
+        'inner join aluno a on a.idaluno = am.idaluno '.
+        'inner join materia m on m.idmateria = am.idmateria '.
+        "where a.nmaluno like '$name%'".
+        'order by am.idalunomatriculado asc'
+    );
+}
 ?>

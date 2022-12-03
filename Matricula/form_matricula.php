@@ -1,12 +1,21 @@
-<?php 
-    require_once("../Componente/header.php");
-    require_once("matricula.php");
-    require_once("../Aluno/aluno.php");
-    require_once("../Materia/materia.php");
+<?php
+require_once("../Componente/header.php");
+require_once("matricula.php");
+require_once("../Aluno/aluno.php");
+require_once("../Materia/materia.php");
 
-    $alunos = listaAlunos();
+$alunos = listaAlunos();
+$materias = listaMateria();
+$matriculas = [];
+$filter = "";
+
+//* SE HOUVER FILTRO $alunos, VIRÁ FILTRADO, SERÃO VIRÁ COMPLETO
+if (isset($_GET['filter'])) {
+    $filter = $_GET['filter'];
+    $matriculas = searchMatriculasByName($filter);
+} else {
     $matriculas = listaMatriculas();
-    $materias = listaMateria()
+}
 ?>
 
 <body>
@@ -15,12 +24,23 @@
     ?>
 
     <div class="content">
-        <h2>Manutenção de matrículas</h2><hr/>
+        <h2>Administração de matrículas</h2>
+        <hr />
+        <!-- FORM DE PESQUISA -->
+        <form method="POST" action="./proc_src_matricula">
+            <label>
+                Pesquisar matrículas pelo nome do aluno:
+                <input type="text" name="srcMatricula" value="<?php echo $filter ?>"/>
+                <input type="submit" value="Pesquisar">
+            </label>
+        </form>
+        <hr>
+        <!-- FORM DE CADASTRO -->
         <form action="../Matricula/proc_ins_matricula.php" method="POST">
             <label style="margin-right:20px">
                 Aluno:
                 <select name="cadAluno">
-                    <?php foreach($alunos as $aluno){?>
+                    <?php foreach ($alunos as $aluno) { ?>
                         <option value="<?php echo $aluno["idaluno"] ?>">
                             <?php echo $aluno["nmaluno"] ?>
                         </option>
@@ -30,7 +50,7 @@
             <label>
                 Matéria:
                 <select name="cadMateria">
-                    <?php foreach($materias as $materia){?>
+                    <?php foreach ($materias as $materia) { ?>
                         <option value="<?php echo $materia["idmateria"] ?>">
                             <?php echo $materia["dsmateria"] ?>
                         </option>
@@ -39,7 +59,7 @@
             </label>
             <input type="submit" value="Cadastrar" />
         </form>
-        <hr/>
+        <hr />
         <?php
 
         echo "<table>" .
@@ -55,16 +75,16 @@
 
         foreach ($matriculas as $matricula) {
             echo '<tr>' .
-                 '  <td><a href=../Matricula/form_matricula.php?alterarid=' . $matricula['idalunomatriculado'] . '>' . $matricula['idalunomatriculado'] . '</a></td>' .
-                 '  <td>' . $matricula['nmaluno'] . '</td>' .
-                 '  <td>' . $matricula['dsmateria'] . '</td>' .
-                 '  <td>' .
-                    '  <form action="../Matricula/proc_del_matricula.php" method="POST">' .
-                    '      <input type="hidden" name="idmatriculaDEL" value="' . $matricula['idalunomatriculado'] . '" />' .
-                    '      <input type="submit" value="Excluir" />' .
-                    '  </form>' .
-                    '</td>' .
-                 '</tr>';
+                '  <td><a href=../Matricula/form_matricula.php?alterarid=' . $matricula['idalunomatriculado'] . '>' . $matricula['idalunomatriculado'] . '</a></td>' .
+                '  <td>' . $matricula['nmaluno'] . '</td>' .
+                '  <td>' . $matricula['dsmateria'] . '</td>' .
+                '  <td>' .
+                '  <form action="../Matricula/proc_del_matricula.php" method="POST">' .
+                '      <input type="hidden" name="idmatriculaDEL" value="' . $matricula['idalunomatriculado'] . '" />' .
+                '      <input type="submit" value="Excluir" />' .
+                '  </form>' .
+                '</td>' .
+                '</tr>';
         }
         ?>
 
@@ -100,20 +120,24 @@
 
             //? PREENCHENDO ComboBox DE ALUNO COM O ALUNO DO REGISTRO SELECIONADO
             echo '<label style="margin-right:20px"> Aluno: <select name="idaluno">';
-                foreach($alunos as $aluno){
-                    echo '<option value="'.$aluno["idaluno"].'"';
-                    if(getMatricula($_GET['alterarid'])[0]['idaluno'] == $aluno['idaluno']){echo 'selected';}
-                    echo'>'.$aluno["nmaluno"].'</option>';
+            foreach ($alunos as $aluno) {
+                echo '<option value="' . $aluno["idaluno"] . '"';
+                if (getMatricula($_GET['alterarid'])[0]['idaluno'] == $aluno['idaluno']) {
+                    echo 'selected';
                 }
+                echo '>' . $aluno["nmaluno"] . '</option>';
+            }
             echo '</select></label>';
 
             //? PREENCHENDO ComboBox DE MATERIA COM A MATERIA DO REGISTRO SELECIONADO
             echo '<label> Matéria: <select name="idmateria">';
-                foreach($materias as $materia){
-                    echo '<option value="'.$materia["idmateria"].'"';
-                    if(getMatricula($_GET['alterarid'])[0]['idmateria'] == $materia['idmateria']){echo 'selected';}
-                    echo '>'.$materia["dsmateria"].'</option>';
+            foreach ($materias as $materia) {
+                echo '<option value="' . $materia["idmateria"] . '"';
+                if (getMatricula($_GET['alterarid'])[0]['idmateria'] == $materia['idmateria']) {
+                    echo 'selected';
                 }
+                echo '>' . $materia["dsmateria"] . '</option>';
+            }
             echo '</select></label>';
 
             echo '    <input type="hidden" name="idmatricula" value="' . $_GET['alterarid'] . '" />';

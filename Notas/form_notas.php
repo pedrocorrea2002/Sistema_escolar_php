@@ -1,12 +1,21 @@
 <?php 
-    require_once("../Componente/header.php");
-    require_once("notas.php");
-    require_once("../Aluno/aluno.php");
-    require_once("../Avaliacao/avaliacao.php");
+require_once("../Componente/header.php");
+require_once("notas.php");
+require_once("../Aluno/aluno.php");
+require_once("../Avaliacao/avaliacao.php");
 
-    $alunos = listaAlunos();
-    $avaliacoes = listaAvaliacoes();
+$alunos = listaAlunos();
+$avaliacoes = listaAvaliacoes();
+$notas = [];
+$filter = "";
+
+//* SE HOUVER FILTRO $alunos, VIRÁ FILTRADO, SERÃO VIRÁ COMPLETO
+if(isset($_GET['filter'])){
+    $filter = $_GET['filter'];
+    $notas = searchNotasByName($filter);
+}else{
     $notas = listaNotas();
+}
 ?>
 
 <body>
@@ -15,7 +24,18 @@
     ?>
 
     <div class="content">
-        <h2>Administração de notas</h2><hr/>
+        <h2>Administração de notas</h2>
+        <hr/>
+        <!-- FORM DE PESQUISA -->
+        <form method="POST" action="./proc_src_notas.php">
+            <label>
+                Pesquisar notas pelo nome do aluno:
+                <input type="text" name="srcNota" value="<?php echo $filter ?>"/>
+                <input type="submit" value="Pesquisar">
+            </label>
+        </form>
+        <hr>
+        <!-- FORM DE CADASTRO -->
         <form action="../Notas/proc_ins_notas.php" method="POST">
             <label style="margin-right:20px">
                 Aluno:

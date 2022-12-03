@@ -61,4 +61,15 @@ function deletenota($id)
     return deleteRegistro($sql);
 }
 
+//* PESQUISA UMA LISTA DE NOTAS COM BASE NO NOME DO ALUNO
+function searchNotasByName($name){
+    $sqlAvaliacaoAluno = "SELECT aa.idavaliacaoaluno, av.dsavaliacao, al.nmaluno, aa.nota, aa.idavaliacao FROM avaliacaoaluno aa ".
+                         "INNER JOIN avaliacao av ON av.idavaliacao = aa.idavaliacao ".
+                         "INNER JOIN aluno al ON al.idaluno = aa.idaluno ". 
+                         "where al.nmaluno like '$name%'".
+                         "ORDER BY aa.idavaliacaoaluno";
+
+    return selectRegistros($sqlAvaliacaoAluno);
+}
+
 ?>

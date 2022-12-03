@@ -6,19 +6,18 @@ require_once("aluno.php");
 $alunos = [];
 $filter = "";
 
-//* SE HOUVER FILTRO $alunos VIRÁ FILTRADO, SERÃO VIRÁ COMPLETO
+//* SE HOUVER FILTRO $alunos, VIRÁ FILTRADO, SERÃO VIRÁ COMPLETO
 if(isset($_GET['filter'])){
     $filter = $_GET['filter'];
     $alunos = searchAlunosByName($filter);
 }else{
     $alunos = listaAlunos();
 }
-
 ?>
 
 <body>
     <div class="content">
-        <h2>Manutenção de alunos</h2><hr/>
+        <h2>Administração de alunos</h2><hr/>
         <!-- FORM DE PESQUISA -->
         <form method="POST" action="./proc_src_aluno">
             <label>
@@ -45,16 +44,16 @@ if(isset($_GET['filter'])){
             "</thead>" .
             "<tbody> ";
 
-        foreach ($alunos as $registro) {
-            echo '    <tr>' .
-                '        <td><a href=form_aluno.php?alterarid=' . $registro['idaluno'] . '>' . $registro['idaluno'] . '</a></td>' .
-                '        <td>' . $registro['nmaluno'] . '</td>' .
-                ' <td>' .
-                '<form action="proc_del_aluno.php" method="POST">' .
-                '    <input type="hidden" name="idalunoDEL" value="' . $registro['idaluno'] . '"/>' .
-                '    <input type="submit" value="Excluir" />' .
-                '</form>' .
-                '    </tr>';
+        foreach ($alunos as $aluno) {
+            echo '<tr>' .
+                 '  <td><a href=form_aluno.php?alterarid=' . $aluno['idaluno'] . '>' . $aluno['idaluno'] . '</a></td>' .
+                 '  <td>' . $aluno['nmaluno'] . '</td>' .
+                 '  <td>' .
+                 '  <form action="proc_del_aluno.php" method="POST">' .
+                 '      <input type="hidden" name="idalunoDEL" value="' . $aluno['idaluno'] . '"/>' .
+                 '      <input type="submit" value="Excluir" />' .
+                 '  </form>' .
+                 '</tr>';
         }
         ?>
 

@@ -41,10 +41,10 @@ function getAluno($id)
 
 //* PESQUISA UMA LISTA DE ALUNO COM BASE NO NOME PASSADO
 function searchAlunosByName($name){
-    return selectRegistros("select * from aluno where nmaluno like '%$name%'");
+    return selectRegistros("select * from aluno where nmaluno like '$name%'");
 }
 
-function setNameAluno($id, $nome)
+function setAluno($id, $nome)
 {
     $sql = "UPDATE ALUNO SET nmaluno='$nome' WHERE idaluno = $id";
 

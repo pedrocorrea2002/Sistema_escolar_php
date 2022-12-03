@@ -4,12 +4,33 @@ require_once("../Materia/materia.php");
 require_once("avaliacao.php");
 require_once("../Componente/menu.php");    
 
-    $materias = listaMateria();   
+$materias = listaMateria();   
+$avaliacoes = [];
+$filter = "";
+
+//* SE HOUVER FILTRO $alunos, VIRÁ FILTRADO, SERÃO VIRÁ COMPLETO
+if(isset($_GET['filter'])){
+$filter = $_GET['filter'];
+    $avaliacoes = searchAvaliacoesByName($filter);
+}else{
+    $avaliacoes = listaAvaliacoes();
+}
  ?>
 
 <body>
     <div class="content">
-        <h2>Cadastro de Avaliações	</h2><hr/>
+        <h2>Cadastro de Avaliações</h2>
+        <hr>
+        <!-- FORM DE PESQUISA -->
+        <form method="POST" action="./proc_src_avaliacao">
+            <label>
+                Pesquisar avaliação:
+                <input type="text" name="srcAvaliacao" value="<?php echo $filter ?>"/>
+                <input type="submit" value="Pesquisar">
+            </label>
+        </form>
+        <hr>
+        <!-- FORM DE CADASTRO -->
         <form action="../Avaliacao/proc_ins_avaliacao.php" method="POST">            
             <label>
                 Avaliações:                 
@@ -19,7 +40,6 @@ require_once("../Componente/menu.php");
                     <option value="av3">Avaliacao 3</option>
                 </select>   
             </label>  
-
             <label>
                 Matéria:
                 <select name="idMateria">
@@ -33,7 +53,7 @@ require_once("../Componente/menu.php");
 
             <input type="submit" value="Cadastrar" />
         </form>
-        
+        <hr>
         <?php
             if(isset($_POST['msg_avaliacao']) && isset($_POST['status_avaliacao'])){
                 if($_POST['status_avaliacao'] == 0){
@@ -53,18 +73,17 @@ require_once("../Componente/menu.php");
         </thead>
         <tbody>
         <?php
-        $avaliacao = listaAvaliacoes();
-        foreach ($avaliacao as $registro) {
+        foreach ($avaliacoes as $avaliacao) {
             echo "<tr>" .
 
             
-                "   <td><a href=form_avaliacao.php?alterarid=".$registro['idavaliacao'].">".$registro['idavaliacao']."</a></td>" .
-                "   <td>" . $registro['dsavaliacao'] . "</td>" .
-                "   <td>" . $registro['dsmateria'] . "</td>" .
+                "   <td><a href=form_avaliacao.php?alterarid=".$avaliacao['idavaliacao'].">".$avaliacao['idavaliacao']."</a></td>" .
+                "   <td>" . $avaliacao['dsavaliacao'] . "</td>" .
+                "   <td>" . $avaliacao['dsmateria'] . "</td>" .
                 # ------------------------------------------------
                 "   <td>" .
                 '   <form action="proc_del_avaliacao.php" method="POST">' .
-                '       <input type="hidden" value="' . $registro['idavaliacao'] . '" name="idavaliacaoDEL" />' .
+                '       <input type="hidden" value="' . $avaliacao['idavaliacao'] . '" name="idavaliacaoDEL" />' .
                 '       <input type="submit" value="Excluir">' .
                 "       </form>" .
                 "   </td>" .
