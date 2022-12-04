@@ -49,13 +49,13 @@ if(isset($_POST['dslogin']) && isset($_POST['dssenha']) && isset($_POST['dsrepit
 
     //* VERIFICANDO SE O ALUNO ESCOLHIDO ESTÁ SEM USO
     $aluno_achado = false;
-    foreach(ListarAlunosValidos() as $aluno){
-        if($aluno['idaluno'] == $idAluno){
+    foreach(ListarLogins() as $itemLogin){
+        if($itemLogin['idaluno'] == $idAluno){
             $aluno_achado = true;
         }
     }
 
-    if(!$aluno_achado){
+    if($aluno_achado){
         $msg_acesso = $msg_acesso."Aluno já está em uso! <br>";
         $status_acesso = 1;
     }
@@ -63,7 +63,7 @@ if(isset($_POST['dslogin']) && isset($_POST['dssenha']) && isset($_POST['dsrepit
     //* VERIFICANDO SE O USUÁRIO ESCOLHIDO ESTÁ SEM USO
     $login_achado = false;
     foreach(ListarLogins() as $itemLogin){
-        if($login['dslogin'] == $login){
+        if($itemLogin['dslogin'] == $login){
             $login_achado = true;
         }
     }
