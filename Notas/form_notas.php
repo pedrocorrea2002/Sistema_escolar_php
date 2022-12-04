@@ -146,7 +146,7 @@ if(isset($_GET['filter'])){
             echo '  </select></label>';
 
             echo '  <label>Nota:'; 
-            echo '  <input name="nota" value="'.getNotas($_GET['alterarid'])['nota'].'" />';
+            echo '  <input type = "number" name="nota" value="'.getNotas($_GET['alterarid'])['nota'].'" />';
             echo '  </label>';
 
             echo '  <input type="hidden" name="idavaliacaoaluno" value="'.$_GET['alterarid'].'" />';

@@ -20,20 +20,19 @@ if (isset($_POST['idAvaliacaoUPD']) && isset($_POST['dsAvaliacao']) && isset($_P
     }
     
     //* VERIFICANDO SE avaliação É as pré selecionadas
-    $lista = array("av1","av2","av3");
+    $lista = array("Av1","Av2","Av3");
     if (!in_array($dsAvaliacao, $lista)) {
         $msg_avaliacao = $msg_avaliacao."Avaliação INVÁLIDA! <br>";
         $status_avaliacao = 1;
     }
 
-    if($msg_avaliacao != ""){
+    if($msg_avaliacao = ""){
         $msg_avaliacao = updAvaliacao($idAvaliacao, $dsAvaliacao, $idMateria);
     }
 }
 
 //* RETORNANDO RESPOSTA PARA O FORMULÁRIO
 echo "<form id='form' action='form_avaliacao.php' method='POST'>".
-        // "<input type='hidden' value='$dslogin' name='dslogin' />".
         "<input type='hidden' value='$msg_avaliacao' name='msg_avaliacao_upd' />".
         "<input type='hidden' value='$status_avaliacao' name='status_avaliacao_upd' />".
       "</form>";
