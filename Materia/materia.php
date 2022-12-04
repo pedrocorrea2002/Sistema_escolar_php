@@ -32,7 +32,7 @@ function cadastrarMateria($nome)
     return insereRegistro($sql);
 }
 
-function getNameMateria($id)
+function getMateria($id)
 {
     $retorno = selectRegistros("select * from materia where idmateria='" . $id . "'");
 
@@ -51,6 +51,17 @@ function deleteMateria($id)
     $sql = "DELETE FROM MATERIA  WHERE idmateria=" . $id;   
 
     return deleteRegistro($sql);
+}
+
+//* VERIFICA SE EXISTE ALGUMA MÁTERIA COM O NOME PASSADO
+function verificaNomeMateria($dsMateria){
+    $retorno = selectRegistros("select * from materia where dsmateria = '$dsMateria'");
+
+    if(count($retorno) > 0){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 //* PESQUISA UMA LISTA DE MATERIA COM BASE NO NOME PASSADO

@@ -19,7 +19,7 @@ if (isset($_POST['idAvaliacaoUPD']) && isset($_POST['dsAvaliacao']) && isset($_P
         $status_avaliacao = 1;
     }
     
-    //* VERIFICANDO SE s avaliação É as pré selecionadas
+    //* VERIFICANDO SE avaliação É as pré selecionadas
     $lista = array("av1","av2","av3");
     if (!in_array($dsAvaliacao, $lista)) {
         $msg_avaliacao = $msg_avaliacao."Avaliação INVÁLIDA! <br>";

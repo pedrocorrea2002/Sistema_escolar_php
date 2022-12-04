@@ -71,4 +71,20 @@ function searchMatriculasByName($name){
         'order by am.idalunomatriculado asc'
     );
 }
+
+//* VERIFICA SE EXISTE UMA MATRICULA CADASTRADA PARA UM TAL ALUNO
+function existeMatriculaAluno($idaluno){
+    $matriculas = selectRegistros("select * from alunomatriculado where idaluno = $idaluno");
+
+    if (count($matriculas) > 0) return true;
+    else return false;
+}
+
+//* VERIFICA SE EXISTE UMA MATRICULA CADASTRADA PARA UMA TAL MATÉRIA
+function existeMatriculaMateria($idmateria){
+    $matriculas = selectRegistros("select * from alunomatriculado where idmateria = $idmateria");
+
+    if (count($matriculas) > 0) return true;
+    else return false;
+}
 ?>

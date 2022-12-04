@@ -34,8 +34,6 @@ if(isset($_POST['idAluno']) && isset($_POST['idAvaliacao']) && isset($_POST['not
         $status_nota = 1;
     }
 
-    echo "msg_nota: $msg_nota";
-
      if($msg_nota == ""){
         $msg_nota = cadastrarnotas($idaluno, $idavaliacao, $nota);
      }
@@ -43,7 +41,7 @@ if(isset($_POST['idAluno']) && isset($_POST['idAvaliacao']) && isset($_POST['not
 
 //* RETORNANDO RESPOSTA PARA O FORMULÁRIO
 echo "<form id='form' action='form_notas.php' method='POST'>".
-        "<input type='hidden' value='$dslogin' name='dslogin' />".
+        // "<input type='hidden' value='$dslogin' name='dslogin' />".
         "<input type='hidden' value='$msg_nota' name='msg_nota' />".
         "<input type='hidden' value='$status_nota' name='status_nota' />".
       "</form>";

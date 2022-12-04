@@ -72,4 +72,12 @@ function searchAvaliacoesByName($name){
     return selectRegistros($sqlAvaliacao);
 }
 
+//* VERIFICA SE EXISTE UMA AVALIAÇÃO CADASTRADA PARA UMA TAL MATÉRIA
+function existeAvaliacaoMateria($idmateria){
+    $avaliacoes = selectRegistros("select * from avaliacao where idmateria = $idmateria");
+
+    if (count($avaliacoes) > 0) return true;
+    else return false;
+}
+
 ?>

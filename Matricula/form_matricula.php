@@ -39,7 +39,7 @@ if (isset($_GET['filter'])) {
         <form action="../Matricula/proc_ins_matricula.php" method="POST">
             <label style="margin-right:20px">
                 Aluno:
-                <select name="cadAluno">
+                <select name="idAluno">
                     <?php foreach ($alunos as $aluno) { ?>
                         <option value="<?php echo $aluno["idaluno"] ?>">
                             <?php echo $aluno["nmaluno"] ?>
@@ -49,7 +49,7 @@ if (isset($_GET['filter'])) {
             </label>
             <label>
                 Matéria:
-                <select name="cadMateria">
+                <select name="idMateria">
                     <?php foreach ($materias as $materia) { ?>
                         <option value="<?php echo $materia["idmateria"] ?>">
                             <?php echo $materia["dsmateria"] ?>
@@ -59,6 +59,15 @@ if (isset($_GET['filter'])) {
             </label>
             <input type="submit" value="Cadastrar" />
         </form>
+        <?php
+            if(isset($_POST['msg_matricula']) && isset($_POST['status_matricula'])){
+                if($_POST['status_matricula'] == 0){
+                    echo "<p style='color:green; font-weight:bolder'>Matrícula inserida com sucesso!</p>";
+                }else{
+                    echo "<p style='color:red; font-weight:bolder'>".$_POST['msg_matricula']."</p>";
+                }
+            }
+        ?>
         <hr />
         <?php
 
@@ -96,13 +105,10 @@ if (isset($_GET['filter'])) {
                     if (isset($_GET['del'])) {
                         switch ($_GET['del']) {
                             case "0":
-                                echo "o registro não pode ser excluído";
+                                echo "o registro está em uso e não pode ser excluído";
                                 break;
                             case "1":
                                 echo "registro excluído";
-                                break;
-                            case "2":
-                                echo "O administrador não pode ser excluído";
                                 break;
                             default:
                                 echo "comando inválido";
@@ -119,7 +125,7 @@ if (isset($_GET['filter'])) {
             echo '<form action="../Matricula/proc_upd_matricula.php" method="POST">';
 
             //? PREENCHENDO ComboBox DE ALUNO COM O ALUNO DO REGISTRO SELECIONADO
-            echo '<label style="margin-right:20px"> Aluno: <select name="idaluno">';
+            echo '<label style="margin-right:20px"> Aluno: <select name="idAluno">';
             foreach ($alunos as $aluno) {
                 echo '<option value="' . $aluno["idaluno"] . '"';
                 if (getMatricula($_GET['alterarid'])[0]['idaluno'] == $aluno['idaluno']) {
@@ -130,7 +136,7 @@ if (isset($_GET['filter'])) {
             echo '</select></label>';
 
             //? PREENCHENDO ComboBox DE MATERIA COM A MATERIA DO REGISTRO SELECIONADO
-            echo '<label> Matéria: <select name="idmateria">';
+            echo '<label> Matéria: <select name="idMateria">';
             foreach ($materias as $materia) {
                 echo '<option value="' . $materia["idmateria"] . '"';
                 if (getMatricula($_GET['alterarid'])[0]['idmateria'] == $materia['idmateria']) {
@@ -140,9 +146,17 @@ if (isset($_GET['filter'])) {
             }
             echo '</select></label>';
 
-            echo '    <input type="hidden" name="idmatricula" value="' . $_GET['alterarid'] . '" />';
+            echo '    <input type="hidden" name="idMatricula" value="' . $_GET['alterarid'] . '" />';
             echo '    <input type="submit" value="alterar" />';
             echo '</form>';
+        }
+
+        if(isset($_POST['msg_matricula_upd']) && isset($_POST['status_matricula_upd'])){
+            if($_POST['status_matricula_upd'] == 0){
+                echo "<p style='color:green; font-weight:bolder'>Matrícula alterada com sucesso!</p>";
+            }else{
+                echo "<p style='color:red; font-weight:bolder'>".$_POST['msg_matricula_upd']."</p>";
+            }
         }
         ?>
     </div>

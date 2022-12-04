@@ -72,4 +72,20 @@ function searchNotasByName($name){
     return selectRegistros($sqlAvaliacaoAluno);
 }
 
+//* VERIFICA SE EXISTE UMA NOTA CADASTRADA PARA UMA TAL ALUNO
+function existeNotaAluno($idaluno){
+    $notas = selectRegistros("select * from avaliacaoaluno where idaluno = $idaluno");
+
+    if (count($notas) > 0) return true;
+    else return false;
+}
+
+//* VERIFICA SE EXISTE UMA NOTA CADASTRADA PARA UMA TAL AVALIAÇÃO
+function existeNotaAvaliacao($idavaliacao){
+    $notas = selectRegistros("select * from avaliacaoaluno where idavaliacao = $idavaliacao");
+
+    if (count($notas) > 0) return true;
+    else return false;
+}
+
 ?>

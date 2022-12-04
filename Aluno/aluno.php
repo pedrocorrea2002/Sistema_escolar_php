@@ -39,6 +39,18 @@ function getAluno($id)
     return $retorno[0];
 }
 
+//* VERIFICA SE EXISTE ALGUM ALUNO COM O NOME PASSADO
+function verificaNomeAluno($nmaluno)
+{
+    $retorno = selectRegistros("select * from aluno where nmaluno = '$nmaluno'");
+
+    if(count($retorno) > 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 //* PESQUISA UMA LISTA DE ALUNO COM BASE NO NOME PASSADO
 function searchAlunosByName($name){
     return selectRegistros("select * from aluno where nmaluno like '$name%'");
@@ -52,7 +64,7 @@ function setAluno($id, $nome)
 }
 function deleteAluno($id)
 {
-    $sql = "DELETE FROM ALUNO  WHERE idaluno=" . $id;   
+    $sql = "DELETE FROM ALUNO WHERE idaluno = $id";   
 
     return deleteRegistro($sql);
 }

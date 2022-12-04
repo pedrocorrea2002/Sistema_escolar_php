@@ -29,10 +29,19 @@ if(isset($_GET['filter'])){
         <hr>
         <!-- FORM DE CADASTRO -->
         <form action="proc_ins_aluno.php" method="POST">
-            <label>Aluno a cadastrar: <input type="text" name="cadAluno" size="30" maxsize="30" /></label>
+            <label>Aluno a cadastrar: <input type="text" name="nmAluno" size="30" maxsize="30" /></label>
             <input type="submit" value="Cadastrar" />
         </form>
         <hr/>
+        <?php
+            if(isset($_POST['msg_aluno']) && isset($_POST['status_aluno'])){
+                if($_POST['status_aluno'] == 0){
+                    echo "<p style='color:green; font-weight:bolder'>Aluno criado com sucesso!</p>";
+                }else{
+                    echo "<p style='color:red; font-weight:bolder'>".$_POST['msg_aluno']."</p>";
+                }
+            }
+        ?>
         <?php
         echo "<table>" .
             "<thead>" .
@@ -70,14 +79,10 @@ if(isset($_GET['filter'])){
                             case "1":
                                 echo "registro excluído";
                                 break;
-                            case "2":
-                                echo "O administrador não pode ser excluído";
-                                break;
                             default:
-                                echo "comando inválido";
+                                echo "Erro interno, tente novamente!";
                         }
                     }
-
                     ?></td>
             </tr>
         </tfoot>
@@ -86,13 +91,20 @@ if(isset($_GET['filter'])){
         <?php
         if (isset($_GET['alterarid'])) {
             echo '<form action="proc_upd_aluno.php" method="POST">';
-            echo '    <input type="text" name="nmaluno" value=" ' . getAluno($_GET['alterarid'])['nmaluno'] . ' " />';
+            echo '    <input type="text" name="nmAluno" value="' . getAluno($_GET['alterarid'])['nmaluno'] . '" />';
             echo '    <input type="hidden" name="idalunoUPD" value="' . $_GET['alterarid'] . '" />';
             echo '    <input type="submit" value="Alterar" />';
             echo '</form>';
         }
+
+        if(isset($_POST['msg_aluno_upd']) && isset($_POST['status_aluno_upd']) && $_POST['status_aluno_upd'] != 0){
+            if($_POST['status_aluno_upd'] == 2){
+                echo "<p style='color:green; font-weight:bolder'>Aluno alterado com sucesso!</p>";
+            }else{
+                echo "<p style='color:red; font-weight:bolder'>".$_POST['msg_aluno_upd']."</p>";
+            }
+        }
         ?>
     </div>
 </body>
-
 </html>

@@ -11,14 +11,18 @@
             if ($id != 1){
                 deletaMatricula($id);
                 header("Location: form_matricula.php?del=1");
+                exit;
             }else{
                 header("Location: form_matricula.php?del=2");
+                exit;
             }
         }else{
             header("Location: form_matricula.php?del=0");
+            exit;
         } 
-        
     }
+
+    header("Location: form_matricula.php");
 ?>
 
 

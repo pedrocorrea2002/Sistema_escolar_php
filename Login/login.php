@@ -84,8 +84,8 @@
         return selectRegistros($sql);
     }
 
-    function ExcluirAluno($valor){
-        $sql = "delete from login where dslogin = '$valor'";
+    function ExcluirAcesso($dslogin){
+        $sql = "delete from login where dslogin = '$dslogin'";
 
         return deleteRegistro($sql);
     }

@@ -8,18 +8,22 @@
     if (isset($_POST['idavaliacaoDEL'])){
         $id = $_POST['idavaliacaoDEL'];        
 
-        $listaNotas = listaNotas();
+        if(!is_numeric($id)){
+            header("Location: form_avaliacao.php?del=2");
+            exit;
+        }
 
-        foreach($listaNotas as $nota){
-            if($nota['idavaliacao'] == $id){
-                header("Location: form_avaliacao.php?del=0");
-            }
+        if(existeNotaAvaliacao($id)){
+            header("Location: form_avaliacao.php?del=0");
+            exit;
         }
 
         deleteavaliacao($id);
-
         header("Location: form_avaliacao.php?del=1");
+        exit;
     }
+
+    header("Location: form_avaliacao.php");
 ?>
 
 

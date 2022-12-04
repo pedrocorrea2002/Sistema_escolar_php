@@ -5,15 +5,21 @@ require_once("../Aluno/aluno.php");
 $msg_acesso = "";
 $status_acesso = 0; //! 0 - EXECUTADO, 1 - ERRO ENCONTRADO
 
-if(isset($_POST['dslogin']) && isset($_POST['dssenha']) && isset($_POST['dsrepita']) && isset($_POST['idaluno'])){
+if(isset($_POST['dslogin']) && isset($_POST['dssenha']) && isset($_POST['dsrepita']) && isset($_POST['idAluno'])){
     $login = trim($_POST['dslogin']);
     $senha = trim($_POST['dssenha']);
     $repita = trim($_POST['dsrepita']);
-    $idaluno = $_POST['idaluno'];
+    $idAluno = $_POST['idAluno'];
 
     //* VERIFICANDO A PRESENÇA DE CÓDIGO MALICIOSO DENTRO DO login
     if(caracteresInvalidos($login)){
         $msg_acesso = $msg_acesso."Usuário inválido!<br>";
+        $status_acesso = 1;
+    }
+
+    //* VERIFICANDO A PRESENÇA DE CÓDIGO MALICIOSO DENTRO DAS SENHAS
+    if(caracteresInvalidos($senha) || caracteresInvalidos($repita)){
+        $msg_acesso = $msg_acesso."Senhas inválidas!<br>";
         $status_acesso = 1;
     }
 
@@ -35,28 +41,22 @@ if(isset($_POST['dslogin']) && isset($_POST['dssenha']) && isset($_POST['dsrepit
         $status_acesso = 1;
     }
 
-    //* VERIFICANDO SE O USUÁRIO ESTÁ LOGADO
-    if(!revalidarLogin()){
-        $msg_acesso = $msg_acesso."Você não tem permissão para alterar essa informação, tente novamente! <br>";
-        $status_acesso = 1;
-    }
-
-    //* VERIFICANDO SE idaluno É NÚMERO
-    if(!is_numeric($idaluno)){
-        $msg_acesso = $msg_acesso."Aluno inválidos<br>";
+    //* VERIFICANDO SE idAluno É NÚMERO
+    if(!is_numeric($idAluno)){
+        $msg_acesso = $msg_acesso."Aluno inválido<br>";
         $status_acesso = 1;
     }
 
     //* VERIFICANDO SE O ALUNO ESCOLHIDO ESTÁ SEM USO
     $aluno_achado = false;
     foreach(ListarAlunosValidos() as $aluno){
-        if($aluno['idaluno'] == $idaluno){
+        if($aluno['idaluno'] == $idAluno){
             $aluno_achado = true;
         }
     }
 
     if(!$aluno_achado){
-        $msg_acesso = $msg_acesso."Aluno não encontrado ou já está em uso! <br>";
+        $msg_acesso = $msg_acesso."Aluno já está em uso! <br>";
         $status_acesso = 1;
     }
 
@@ -75,7 +75,7 @@ if(isset($_POST['dslogin']) && isset($_POST['dssenha']) && isset($_POST['dsrepit
 
     //* INSERINDO
     if($msg_acesso == ""){
-        $msg_acesso = cadastrarLogin($login,md5($senha),$idaluno);
+        $msg_acesso = cadastrarLogin($login,md5($senha),$idAluno);
     }
 }
 
@@ -89,5 +89,4 @@ echo "<form id='form' action='form_acesso.php' method='POST'>".
 echo "<script>".
         "document.getElementById('form').submit()".
      "</script>";
-
 ?>

@@ -6,10 +6,10 @@ $logins = [];
 $filter = "";
 
 //* SE HOUVER FILTRO $logins, VIRÁ FILTRADO, SERÃO VIRÁ COMPLETO
-if(isset($_GET['filter'])){
+if (isset($_GET['filter'])) {
     $filter = $_GET['filter'];
     $logins = searchAcessosByUsuario($filter);
-}else{
+} else {
     $logins = ListarTodosLogin();
 }
 ?>
@@ -17,21 +17,21 @@ if(isset($_GET['filter'])){
 <div class="content">
     <h2>Administração de acessos</h2>
     <hr>
-        <!-- FORM DE PESQUISA -->
-        <form method="POST" action="./proc_src_acesso">
-            <label>
-                Pesquisar acesso:
-                <input type="text" name="srcAcesso" value="<?php echo $filter ?>"/>
-                <input type="submit" value="Pesquisar">
-            </label>
-        </form>
-        <hr>
-        <!-- FORM DE CADASTRO -->
+    <!-- FORM DE PESQUISA -->
+    <form method="POST" action="./proc_src_acesso">
+        <label>
+            Pesquisar acesso:
+            <input type="text" name="srcAcesso" value="<?php echo $filter ?>" />
+            <input type="submit" value="Pesquisar">
+        </label>
+    </form>
+    <hr>
+    <!-- FORM DE CADASTRO -->
     <form action="proc_ins_acesso.php" method="POST">
         <label>Usuário: <input type="text" name=dslogin> </label>
         <label>Senha: <input type="password" name=dssenha> </label>
         <label>Repita a senha: <input type="password" name=dsrepita> </label>
-        <select name="idaluno">
+        <select name="idAluno">
             <option selected></option>
 
             <?php
@@ -46,13 +46,13 @@ if(isset($_GET['filter'])){
     </form>
 
     <?php
-        if(isset($_POST['msg_acesso']) && isset($_POST['status_acesso'])){
-            if($_POST['status_acesso'] == 0){
-                echo "<p style='color:green; font-weight:bolder'>Acesso inserido com sucesso!</p>";
-            }else{
-                echo "<p style='color:red; font-weight:bolder'>".$_POST['msg_acesso']."</p>";
-            }
+    if (isset($_POST['msg_acesso']) && isset($_POST['status_acesso'])) {
+        if ($_POST['status_acesso'] == 0) {
+            echo "<p style='color:green; font-weight:bolder'>Acesso inserido com sucesso!</p>";
+        } else {
+            echo "<p style='color:red; font-weight:bolder'>" . $_POST['msg_acesso'] . "</p>";
         }
+    }
     ?>
 
     <hr />
@@ -66,7 +66,7 @@ if(isset($_GET['filter'])){
             <th> Excluir </th>
         </thead>
         <tbody>
-            
+
             <?php
             foreach ($logins as $login) {
                 echo "<tr>" .
@@ -91,7 +91,21 @@ if(isset($_GET['filter'])){
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="5"></td>
+                <td colspan="5">
+                    <?php
+                    if (isset($_GET['del'])) {
+                        switch ($_GET['del']) {
+                            case "1":
+                                echo "registro excluído";
+                                break;
+                            case "2":
+                                echo "O administrador não pode ser excluído";
+                                break;
+                            default:
+                                echo "comando inválido";
+                        }
+                    }
+                ?></td>
             </tr>
         </tfoot>
     </table>

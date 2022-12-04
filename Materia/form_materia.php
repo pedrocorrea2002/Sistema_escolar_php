@@ -34,11 +34,19 @@ $filter = $_GET['filter'];
         <hr>
         <!-- FORM DE CADASTRO -->
         <form action="proc_ins_materia.php" method="POST">
-            <label>Materia a cadastrar: <input type="text" name="cadMateria" size="30" maxsize="30" /></label>
+            <label>Materia a cadastrar: <input type="text" name="dsMateria" size="30" maxsize="30" /></label>
             <input type="submit" value="Cadastrar" />
         </form>
         <hr />
-        
+        <?php
+            if(isset($_POST['msg_materia']) && isset($_POST['status_materia'])){
+                if($_POST['status_materia'] == 0){
+                    echo "<p style='color:green; font-weight:bolder'>Matéria criada com sucesso!</p>";
+                }else{
+                    echo "<p style='color:red; font-weight:bolder'>".$_POST['msg_materia']."</p>";
+                }
+            }
+        ?>
         <?php
         echo "<table>" .
             "<thead>" .
@@ -61,7 +69,6 @@ $filter = $_GET['filter'];
                 '    </tr>';
         }
         ?>
-
         <tfoot>
             <tr>
                 <td colspan="3">
@@ -70,13 +77,10 @@ $filter = $_GET['filter'];
                     if (isset($_GET['del'])) {
                         switch ($_GET['del']) {
                             case "0":
-                                echo "o registro não pode ser excluído";
+                                echo "o registro está em uso e não pode ser excluído";
                                 break;
                             case "1":
                                 echo "registro excluído";
-                                break;
-                            case "2":
-                                echo "O administrador não pode ser excluído";
                                 break;
                             default:
                                 echo "comando inválido";
@@ -91,10 +95,18 @@ $filter = $_GET['filter'];
         <?php
         if (isset($_GET['alterarid'])) {
             echo '<form action="proc_upd_materia.php" method="POST">';
-            echo '    <input type="text" name="dsmateria" value=" ' . getNameMateria($_GET['alterarid']) . ' " />';
+            echo '    <input type="text" name="dsMateria" value="' . getMateria($_GET['alterarid']) . '" />';
             echo '    <input type="hidden" name="idMateriaUPD" value="' . $_GET['alterarid'] . '" />';
             echo '    <input type="submit" value="alterar" />';
             echo '</form>';
+        }
+
+        if(isset($_POST['msg_materia_upd']) && isset($_POST['status_materia_upd'])){
+            if($_POST['status_materia_upd'] == 0){
+                echo "<p style='color:green; font-weight:bolder'>Matéria criada com sucesso!</p>";
+            }else{
+                echo "<p style='color:red; font-weight:bolder'>".$_POST['msg_materia_upd']."</p>";
+            }
         }
         ?>
     </div>
