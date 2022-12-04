@@ -6,13 +6,15 @@ require_once("../Componente/menu.php");
 
 $materias = listaMateria();   
 $avaliacoes = [];
-$filter = "";
+$filterTipo = "";
+$filterMateria = "";
 $tipoAv= ListaAv();
  
-//* SE HOUVER FILTRO $alunos, VIRÁ FILTRADO, SERÃO VIRÁ COMPLETO
-if(isset($_GET['filter'])){
-    $filter = $_GET['filter'];
-    $avaliacoes = searchAvaliacoesByName($filter);
+//* SE HOUVER FILTRO, $avaliacoes VIRÁ FILTRADO, SE NÃO, VIRÁ COMPLETO
+if(isset($_GET['tipo']) && isset($_GET['materia'])){
+    $filterTipo = trim($_GET['tipo']);
+    $filterMateria = trim($_GET['materia']);
+    $avaliacoes = searchAvaliacoesByTipoAndMateria($filterTipo, $filterMateria);
 }else{
     $avaliacoes = listaAvaliacoes();
 }
@@ -25,13 +27,26 @@ if(isset($_GET['filter'])){
         <!-- FORM DE PESQUISA -->
         <form method="POST" action="./proc_src_avaliacao">
             <label>
-                Pesquisar avaliação por tipo:
-                <select name="srcAvaliacao">
-                    <option <?php if($filter == ""){echo "selected";}?>></option>
-                    <option <?php if($filter == "Av1"){echo "selected";}?>>Av1</option>
-                    <option <?php if($filter == "Av2"){echo "selected";}?>>Av2</option>
-                    <option <?php if($filter == "Av3"){echo "selected";}?>>Av3</option>
+                Pesquisar avaliação por tipo ou matéria:
+                <select name="tipo">
+                    <option value='' <?php if($filterTipo == ""){echo "selected";}?>></option>
+                    <option value='Av1' <?php if($filterTipo == "Av1"){echo "selected";}?>>Av1</option>
+                    <option value='Av2' <?php if($filterTipo == "Av2"){echo "selected";}?>>Av2</option>
+                    <option value='Av3' <?php if($filterTipo == "Av3"){echo "selected";}?>>Av3</option>
                 </select>
+                <select name="materia">
+                    <option value='' <?php if($filterMateria == ""){echo "selected";}?>></option>
+                    <?php
+                        foreach($materias as $materia){
+                            echo "<option value='".$materia['dsmateria']."'";
+                                if($filterMateria == $materia['dsmateria']){
+                                    echo ' selected';
+                                }   
+                            echo ">".$materia['dsmateria']."</option>";
+                        }
+                    ?>
+                </select>
+                <input type="text" name="campo" value="tipo" hidden>
                 <input type="submit" value="Pesquisar">
             </label>
         </form>

@@ -63,11 +63,31 @@ function deleteavaliacao($id){
     return deleteRegistro($sql);
 }
 
-//* PESQUISA UMA LISTA DE AVALIAÇÃO COM BASE NO NOME PASSADO
-function searchAvaliacoesByName($name){
-    $sqlAvaliacao = "SELECT * FROM avaliacao A ".
-    "INNER JOIN materia M ON M.idmateria = A.idmateria ".  # INNER JOIN outra_tabela ot ON ot.chave_estrangeira = tb.chave_estrangeira_equivalente                       
-    "where A.dsavaliacao like '$name%' ORDER BY A.idavaliacao";
+//* PESQUISA UMA LISTA DE AVALIAÇÃO COM BASE NO TIPO E NA MATÉRIA
+function searchAvaliacoesByTipoAndMateria($tipo, $materia){
+    $sqlAvaliacao = "";
+
+    if(!empty($tipo) && empty($materia)){
+        $sqlAvaliacao = "SELECT * FROM avaliacao A ".
+        "INNER JOIN materia M ON M.idmateria = A.idmateria ".
+        "where A.dsavaliacao = '$tipo' ".
+        "ORDER BY A.idavaliacao";
+    }elseif(empty($tipo) && !empty($materia)){
+        $sqlAvaliacao = "SELECT * FROM avaliacao A ".
+        "INNER JOIN materia M ON M.idmateria = A.idmateria ".
+        "where M.dsmateria = '$materia' ".
+        "ORDER BY A.idavaliacao";
+    }elseif(!empty($tipo) && !empty($materia)){
+        $sqlAvaliacao = "SELECT * FROM avaliacao A ".
+        "INNER JOIN materia M ON M.idmateria = A.idmateria ".
+        "where A.dsavaliacao = '$tipo' ".
+        "and M.dsmateria = '$materia' ".
+        "ORDER BY A.idavaliacao";
+    }else{
+        $sqlAvaliacao = "SELECT * FROM avaliacao A ".
+        "INNER JOIN materia M ON M.idmateria = A.idmateria ".
+        "ORDER BY A.idavaliacao";
+    }
 
     return selectRegistros($sqlAvaliacao);
 }
