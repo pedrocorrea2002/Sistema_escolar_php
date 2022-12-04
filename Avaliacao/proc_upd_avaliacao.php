@@ -6,12 +6,10 @@ require_once("../Utils/valida_formulario.php");
 $msg_avaliacao = "";
 $status_avaliacao = 0; //! 0 - EXECUTADO, 1 - ERRO ENCONTRADO
 
-
 if (isset($_POST['idAvaliacaoUPD']) && isset($_POST['dsAvaliacao']) && isset($_POST['idMateria'])) {    
+    $idAvaliacao = $_POST['idAvaliacaoUPD'];
     $idMateria = $_POST['idMateria'];
     $dsAvaliacao = trim($_POST['dsAvaliacao']);
-    $idAvaliacao = $_POST['idAvaliacaoUPD'];
-
 
     //* VERIFICANDO SE idaluno É NÚMERO
     if(!is_numeric($idMateria)){
@@ -26,7 +24,7 @@ if (isset($_POST['idAvaliacaoUPD']) && isset($_POST['dsAvaliacao']) && isset($_P
         $status_avaliacao = 1;
     }
 
-    if($msg_avaliacao = ""){
+    if($msg_avaliacao == ""){
         $msg_avaliacao = updAvaliacao($idAvaliacao, $dsAvaliacao, $idMateria);
     }
 }

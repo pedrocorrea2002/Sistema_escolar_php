@@ -35,7 +35,7 @@ $filter = $_GET['filter'];
         <form action="../Avaliacao/proc_ins_avaliacao.php" method="POST">     
 
             <label name="lblAvaliacao">
-                Avaliações:                 
+                Tipo:                 
                 <select name="dsAvaliacao">
                     <?php foreach($tipoAv as $tipoavaliacao){?>
                         <option value="<?php echo $tipoavaliacao["tipoAv"] ?>">
@@ -72,7 +72,7 @@ $filter = $_GET['filter'];
         <table style="border: 1px; border-color:black;">
         <thead>
             <th>Identificação</th>
-            <th>Avaliação</th>   
+            <th>Tipo</th>   
             <th>Matéria</th>                 
             <th>Excluir</th>
         </thead>
@@ -133,7 +133,7 @@ $filter = $_GET['filter'];
 
 // ----------------------------------------------------------------------------------
             //? PREENCHENDO ComboBox DE AVALIACOES COM A AVALIACAO DO REGISTRO SELECIONADO
-            echo '<label> Avaliacoes: <select name="dsAvaliacao">';
+            echo '<label> Tipo: <select name="dsAvaliacao">';
                 foreach($tipoAv as $avaliacao){
                     echo '<option value="'.$avaliacao["tipoAv"].'"';
                     if(getAvaliacao($_GET['alterarid'])['idavaliacao'] == $avaliacao['tipoAv']){echo 'selected';}

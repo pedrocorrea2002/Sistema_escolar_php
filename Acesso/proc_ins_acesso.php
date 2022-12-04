@@ -17,6 +17,7 @@ if(isset($_POST['dslogin']) && isset($_POST['dssenha']) && isset($_POST['dsrepit
         $status_acesso = 1;
     }
 
+
     //* VERIFICANDO A PRESENÇA DE CÓDIGO MALICIOSO DENTRO DAS SENHAS
     if(caracteresInvalidos($senha) || caracteresInvalidos($repita)){
         $msg_acesso = $msg_acesso."Senhas inválidas!<br>";
