@@ -97,8 +97,8 @@ if(isset($_GET['filter'])){
             echo '</form>';
         }
 
-        if(isset($_POST['msg_aluno_upd']) && isset($_POST['status_aluno_upd']) && $_POST['status_aluno_upd'] != 0){
-            if($_POST['status_aluno_upd'] == 2){
+        if(isset($_POST['msg_aluno_upd']) && isset($_POST['status_aluno_upd'])){
+            if($_POST['status_aluno_upd'] == 0){
                 echo "<p style='color:green; font-weight:bolder'>Aluno alterado com sucesso!</p>";
             }else{
                 echo "<p style='color:red; font-weight:bolder'>".$_POST['msg_aluno_upd']."</p>";

@@ -8,7 +8,7 @@ if(isset($_POST['srcAvaliacao']) && !empty(trim($_POST['srcAvaliacao']))){
     $srcAvaliacao = trim($_POST['srcAvaliacao']);
 
     //* VERIFICANDO A PRESENÇA DE CÓDIGO MALICIOSO DENTRO DO srcAluno
-    if(!caracteresInvalidos($srcAvaliacao)){
+    if(!caracteresInvalidos($srcAvaliacao) && !caracteresInvalidos($campo)){
         header("Location: form_avaliacao.php?filter=$srcAvaliacao");
     }
 }else{

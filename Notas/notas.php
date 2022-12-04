@@ -15,9 +15,10 @@ function selecionanotas($nome)
 
 function listanotas()
 {
-    $sqlAvaliacaoAluno = "SELECT aa.idavaliacaoaluno, av.dsavaliacao, al.nmaluno, aa.nota, aa.idavaliacao FROM avaliacaoaluno aa ".
+    $sqlAvaliacaoAluno = "SELECT * FROM avaliacaoaluno aa ".
                          "INNER JOIN avaliacao av ON av.idavaliacao = aa.idavaliacao ".
-                         "INNER JOIN aluno al ON al.idaluno = aa.idaluno ". 
+                         "INNER JOIN aluno al ON al.idaluno = aa.idaluno ".
+                         "INNER JOIN materia m ON m.idmateria = av.idmateria ".
                          "ORDER BY aa.idavaliacaoaluno";
     
     return selectRegistros($sqlAvaliacaoAluno);

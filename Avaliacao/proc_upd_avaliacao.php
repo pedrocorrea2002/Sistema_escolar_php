@@ -24,6 +24,16 @@ if (isset($_POST['idAvaliacaoUPD']) && isset($_POST['dsAvaliacao']) && isset($_P
         $status_avaliacao = 1;
     }
 
+    //* VERIFICANDO SE JÁ EXISTE UMA OUTRA AVALIAÇÃO COM OS MESMO CAMPOS
+    if($msg_avaliacao == ""){
+        foreach(listaAvaliacoes() as $avaliacao){
+            if($avaliacao['idmateria'] == $idMateria && $avaliacao['dsavaliacao'] == $dsAvaliacao){
+                $msg_avaliacao = $msg_avaliacao."Avaliação já inserida! <br>";
+                $status_avaliacao = 1;
+            }
+        }
+    }
+
     if($msg_avaliacao == ""){
         $msg_avaliacao = updAvaliacao($idAvaliacao, $dsAvaliacao, $idMateria);
     }

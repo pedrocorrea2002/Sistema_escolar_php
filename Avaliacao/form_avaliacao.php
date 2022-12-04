@@ -11,7 +11,7 @@ $tipoAv= ListaAv();
  
 //* SE HOUVER FILTRO $alunos, VIRÁ FILTRADO, SERÃO VIRÁ COMPLETO
 if(isset($_GET['filter'])){
-$filter = $_GET['filter'];
+    $filter = $_GET['filter'];
     $avaliacoes = searchAvaliacoesByName($filter);
 }else{
     $avaliacoes = listaAvaliacoes();
@@ -25,8 +25,13 @@ $filter = $_GET['filter'];
         <!-- FORM DE PESQUISA -->
         <form method="POST" action="./proc_src_avaliacao">
             <label>
-                Pesquisar avaliação:
-                <input type="text" name="srcAvaliacao" value="<?php echo $filter ?>"/>
+                Pesquisar avaliação por tipo:
+                <select name="srcAvaliacao">
+                    <option <?php if($filter == ""){echo "selected";}?>></option>
+                    <option <?php if($filter == "Av1"){echo "selected";}?>>Av1</option>
+                    <option <?php if($filter == "Av2"){echo "selected";}?>>Av2</option>
+                    <option <?php if($filter == "Av3"){echo "selected";}?>>Av3</option>
+                </select>
                 <input type="submit" value="Pesquisar">
             </label>
         </form>
@@ -43,7 +48,6 @@ $filter = $_GET['filter'];
                         </option>
                     <?php } ?>
                 </select>
-                
             </label>  
             <label>
                 Matéria:
@@ -136,7 +140,7 @@ $filter = $_GET['filter'];
             echo '<label> Tipo: <select name="dsAvaliacao">';
                 foreach($tipoAv as $avaliacao){
                     echo '<option value="'.$avaliacao["tipoAv"].'"';
-                    if(getAvaliacao($_GET['alterarid'])['idavaliacao'] == $avaliacao['tipoAv']){echo 'selected';}
+                    if(getAvaliacao($_GET['alterarid'])['dsavaliacao'] == $avaliacao['tipoAv']){echo 'selected';}
                     echo '>'.$avaliacao["tipoAv"].'</option>';
                 }
             echo '    <input type="hidden" name="idAvaliacaoUPD" value="' . $_GET['alterarid'] . '" />';                

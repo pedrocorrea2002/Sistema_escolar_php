@@ -16,40 +16,46 @@ if(isset($_POST['idaluno']) && isset($_POST['idavaliacao']) && isset($_POST['not
     if(!is_numeric($idaluno) || !is_numeric($idavaliacao) || !is_numeric($nota) || !is_numeric($id)){
         $msg_nota = $msg_nota."Valores inválidos!<br>";
         $status_nota = 1;
+    }else{
+        //* VERIFICANDO SE A NOTA É NEGATIVA
+        if($nota < 0){
+            $msg_nota = $msg_nota."A nota não pode ser um número negativo!<br>";
+            $status_nota = 1;
+        }
+
+        //* VERIFICANDO SE A NOTA ESCOLHIDA EXISTE ESCOLHIDA AINDA EXISTE
+        try{
+            getNotas($id); 
+        }catch(Exception $e){
+            $msg_nota = $msg_nota."Registro não encontrado, tente novamente! <br>";
+            $status_nota = 1;
+        }
+    
+        //* VERIFICANDO SE A AVALIAÇÃO ESCOLHIDA AINDA EXISTE
+        try{
+            getAvaliacao($idavaliacao); 
+        }catch(Exception $e){
+            $msg_nota = $msg_nota."Avaliação não encontrado! <br>";
+            $status_nota = 1;
+        }
+    
+        //* VERIFICANDO SE O ALUNO ESCOLHIDO AINDA EXISTE
+        try{
+            getAluno($idaluno);
+        }catch(Exception $e){
+            $msg_nota = $msg_nota."Aluno não encontrada! <br>";
+            $status_nota = 1;
+        }
+    
+        echo "msg_nota: $msg_nota";
+    
+         if($msg_nota == ""){
+            $msg_nota = setNotas($id, $idaluno, $idavaliacao, $nota);
+         }
     }
-
-    //* VERIFICANDO SE A NOTA ESCOLHIDA EXISTE ESCOLHIDA AINDA EXISTE
-    try{
-        getNotas($id); 
-    }catch(Exception $e){
-        $msg_nota = $msg_nota."Registro não encontrado, tente novamente! <br>";
-        $status_nota = 1;
-    }
-
-    //* VERIFICANDO SE A AVALIAÇÃO ESCOLHIDA AINDA EXISTE
-    try{
-        getAvaliacao($idavaliacao); 
-    }catch(Exception $e){
-        $msg_nota = $msg_nota."Avaliação não encontrado! <br>";
-        $status_nota = 1;
-    }
-
-    //* VERIFICANDO SE O ALUNO ESCOLHIDO AINDA EXISTE
-    try{
-        getAluno($idaluno);
-    }catch(Exception $e){
-        $msg_nota = $msg_nota."Aluno não encontrada! <br>";
-        $status_nota = 1;
-    }
-
-    echo "msg_nota: $msg_nota";
-
-     if($msg_nota == ""){
-        $msg_nota = setNotas($id, $idaluno, $idavaliacao, $nota);
-     }
 }
 
-// //* RETORNANDO RESPOSTA PARA O FORMULÁRIO
+//* RETORNANDO RESPOSTA PARA O FORMULÁRIO
 echo "<form id='form' action='form_notas.php' method='POST'>".
         "<input type='hidden' value='$dslogin' name='dslogin' />".
         "<input type='hidden' value='$msg_nota' name='msg_nota_upd' />".

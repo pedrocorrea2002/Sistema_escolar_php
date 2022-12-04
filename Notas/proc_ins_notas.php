@@ -16,22 +16,28 @@ if(isset($_POST['idAluno']) && isset($_POST['idAvaliacao']) && isset($_POST['not
     if(!is_numeric($idaluno) || !is_numeric($idavaliacao) || !is_numeric($nota)){
         $msg_nota = $msg_nota."Valores inválidos!<br>";
         $status_nota = 1;
-    }
-
-    //* VERIFICANDO SE A AVALIAÇÃO ESCOLHIDA AINDA EXISTE
-    try{
-        getAvaliacao($idavaliacao);
-    }catch(Exception $e){
-        $msg_nota = $msg_nota."Avaliação não encontrada! <br>";
-        $status_nota = 1;
-    }
-
-    //* VERIFICANDO SE O ALUNO ESCOLHIDO AINDA EXISTE
-    try{
-        getAluno($idaluno);
-    }catch(Exception $e){
-        $msg_nota = $msg_nota."Aluno não encontrado! <br>";
-        $status_nota = 1;
+    }else{
+        //* VERIFICANDO SE A NOTA É NEGATIVA
+        if($nota < 0){
+            $msg_nota = $msg_nota."A nota não pode ser um número negativo!<br>";
+            $status_nota = 1;
+        }
+    
+        //* VERIFICANDO SE A AVALIAÇÃO ESCOLHIDA AINDA EXISTE
+        try{
+            getAvaliacao($idavaliacao);
+        }catch(Exception $e){
+            $msg_nota = $msg_nota."Avaliação não encontrada! <br>";
+            $status_nota = 1;
+        }
+    
+        //* VERIFICANDO SE O ALUNO ESCOLHIDO AINDA EXISTE
+        try{
+            getAluno($idaluno);
+        }catch(Exception $e){
+            $msg_nota = $msg_nota."Aluno não encontrado! <br>";
+            $status_nota = 1;
+        }
     }
 
      if($msg_nota == ""){

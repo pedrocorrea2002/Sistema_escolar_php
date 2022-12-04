@@ -52,7 +52,7 @@ if(isset($_GET['filter'])){
                 <select name="idAvaliacao">
                     <?php foreach($avaliacoes as $avaliacao){?>
                         <option value="<?php echo $avaliacao["idavaliacao"] ?>">
-                            <?php echo $avaliacao["dsavaliacao"] ?>
+                            <?php echo $avaliacao["dsavaliacao"]." / ".$avaliacao["dsmateria"] ?>
                         </option>
                     <?php } ?>
                 </select>
@@ -91,8 +91,8 @@ if(isset($_GET['filter'])){
                 echo '<tr>' .
                     ' <td><a href=form_notas.php?alterarid=' . $nota['idavaliacaoaluno'] . '>' . $nota['idavaliacaoaluno'] . '</a></td>' .
                     ' <td>' . $nota['nmaluno'] . '</td>' .
-                    ' <td>' . $nota['dsavaliacao'] . '</td>' .
-                    ' <td>' . $nota['nota'] . '</td>' .
+                    ' <td>' . $nota['dsavaliacao']." / ".$nota['dsmateria']. '</td>' .
+                    ' <td>' . number_format($nota['nota'], 1, '.','') . '</td>' .
                     ' <td>' .
                     '   <form action="proc_del_notas.php" method="POST">' .
                     '       <input type="hidden" name="idnotasDEL" value="' . $nota['idavaliacaoaluno'] . '" />' .
