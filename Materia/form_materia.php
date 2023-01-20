@@ -53,6 +53,7 @@ $filter = $_GET['filter'];
             "<tr>" .
             "<th>Identificação</th>" .
             "<th>Nome:</th>" .
+            "<th>Exclusão:</th>" .
             "</tr>" .
             "</thead>" .
             "<tbody> ";
@@ -62,9 +63,9 @@ $filter = $_GET['filter'];
                 '        <td><a href=form_materia.php?alterarid=' . $materia['idmateria'] . '>' . $materia['idmateria'] . '</a></td>' .
                 '        <td>' . $materia['dsmateria'] . '</td>' .
                 ' <td>' .
-                '<form action="proc_del_materia.php" method="POST">' .
+                '<form action="proc_del_materia.php" method="POST" id="button_'.$materia['idmateria'].'">' .
                 '    <input type="hidden" name="idmateriaDEL" value="' . $materia['idmateria'] . '" />' .
-                '    <input type="submit" value="Excluir" />' .
+                '    <div class="table_button" onClick="document.getElementById(`button_'.$materia['idmateria'].'`).submit()">Excluir</div>' .
                 '</form>' .
                 '    </tr>';
         }

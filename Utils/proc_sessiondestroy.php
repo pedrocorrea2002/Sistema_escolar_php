@@ -27,5 +27,5 @@ session_destroy();
 session_start();
 //var_dump($_SESSION);
 session_destroy();
-header("Location: proc_login.php");
+header("Location: ../Login/proc_login.php");
 ?>

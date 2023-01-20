@@ -74,15 +74,15 @@ if (isset($_GET['filter'])) {
                     "<td>" . $login['dssenha'] . "</td>" .
                     "<td>" . $login['nmaluno'] . "</td>" .
                     "<td>" .
-                    '<form action="form_update_acesso.php" method="POST">' .
-                    '<input type="hidden" value="' . $login['dslogin'] .  '" name="dslogin" />' .
-                    '<input type="submit" value="X">' .
+                    '<form action="form_update_acesso.php" method="POST" id="alterar_'.$login['dslogin'].'">' .
+                    '   <input type="hidden" value="' . $login['dslogin'] .  '" name="dslogin" />' .
+                    '   <div class="table_button" onClick="document.getElementById(`alterar_'.$login['dslogin'].'`).submit()">Alterar</div>' .
                     "</form>" .
                     "</td>" .
                     "<td>" .
-                    '<form action="proc_delete_acesso.php" method="POST">' .
-                    '<input type="hidden" value="' . $login['dslogin'] .  '" name="dslogin" />' .
-                    '<input type="submit" value="X">' .
+                    '<form action="proc_delete_acesso.php" method="POST" id="delete_'.$login['dslogin'].'">' .
+                    '   <input type="hidden" value="' . $login['dslogin'] .  '" name="dslogin" />' .
+                    '   <div class="table_button" onClick="document.getElementById(`delete_'.$login['dslogin'].'`).submit()">Excluir</div>' .
                     "</form>" .
                     "</td>" .
                     "</tr>";

@@ -58,9 +58,9 @@ if(isset($_GET['filter'])){
                  '  <td><a href=form_aluno.php?alterarid=' . $aluno['idaluno'] . '>' . $aluno['idaluno'] . '</a></td>' .
                  '  <td>' . $aluno['nmaluno'] . '</td>' .
                  '  <td>' .
-                 '  <form action="proc_del_aluno.php" method="POST">' .
+                 '  <form action="proc_del_aluno.php" method="POST" id="button_'.$aluno['idaluno'].'">' .
                  '      <input type="hidden" name="idalunoDEL" value="' . $aluno['idaluno'] . '"/>' .
-                 '      <input type="submit" value="Excluir" />' .
+                 '      <div class="table_button" onClick="document.getElementById(`button_'.$aluno['idaluno'].'`).submit()">Excluir</div>' .
                  '  </form>' .
                  '</tr>';
         }

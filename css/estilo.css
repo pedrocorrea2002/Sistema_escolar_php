@@ -10,7 +10,7 @@ body {
 
 .sidenav {
   height: 100%;
-  width: 200px;
+  width: 240px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -23,7 +23,9 @@ body {
   color: white;
   padding: 16px;
   text-decoration: none;
-  display: block;
+  display: flex;
+
+  align-items: center;
 }
 
 .sidenav a:hover {
@@ -31,17 +33,24 @@ body {
   color: black;
 }
 
+.sidenav a img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
 .content {
-  margin-left: 200px;
-  padding-left: 20px;
+  margin-left: 240px;
+  padding-left: 10px;
 }
 
 table {
-  border-color: black;
+  border-spacing:0px;
 }
 
 thead {
   background-color: #95A5A6;
+
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -55,6 +64,27 @@ tbody {
   color: black;
   font-size: large;
 }
+
+/*^ ESTILO DAS CÉLULAS DO CABEÇALHO*/
+th {
+  border: 3px black solid;
+  border-right: 0px;
+  padding:2px;
+}
+th:last-child {
+  border-right: 3px black solid;
+}
+
+/*^ ESTILO DAS CÉLULAS DO CORPO DA TABELA*/
+td {
+  border-left: 3px black solid;
+  padding:2px;
+}
+
+td:last-child {
+  border-right: 3px black solid;
+}
+
 tfoot {
   background-color: #95A5A6;
   font-size: 14px;
@@ -64,4 +94,24 @@ tfoot {
   font-size:larger;
 }
 
+.button_td{
+  padding: 0px;
+}
 
+.table_button{
+  width: 100%;
+  height: 100%;
+
+  background-color: white;
+  color: black;
+  font-weight: bold;
+
+  display:flex;
+  justify-content: center;
+}
+
+.table_button:hover{
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}

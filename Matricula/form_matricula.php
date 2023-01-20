@@ -88,9 +88,9 @@ if (isset($_GET['filter'])) {
                 '  <td>' . $matricula['nmaluno'] . '</td>' .
                 '  <td>' . $matricula['dsmateria'] . '</td>' .
                 '  <td>' .
-                '  <form action="../Matricula/proc_del_matricula.php" method="POST">' .
+                '  <form action="../Matricula/proc_del_matricula.php" method="POST" id="button_'.$matricula['idalunomatriculado'].'">' .
                 '      <input type="hidden" name="idmatriculaDEL" value="' . $matricula['idalunomatriculado'] . '" />' .
-                '      <input type="submit" value="Excluir" />' .
+                '      <div class="table_button" onClick="document.getElementById(`button_'.$matricula['idalunomatriculado'].'`).submit()">Excluir</div>' .
                 '  </form>' .
                 '</td>' .
                 '</tr>';
@@ -99,7 +99,7 @@ if (isset($_GET['filter'])) {
 
         <tfoot>
             <tr>
-                <td colspan="3">
+                <td colspan="4">
                     <?php
                     if (isset($_GET['upd'])) echo "Registro alterado";
                     if (isset($_GET['del'])) {

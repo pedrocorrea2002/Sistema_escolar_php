@@ -104,12 +104,11 @@ if(isset($_GET['tipo']) && isset($_GET['materia'])){
                 "   <td><a href=form_avaliacao.php?alterarid=".$avaliacao['idavaliacao'].">".$avaliacao['idavaliacao']."</a></td>" .
                 "   <td>" . $avaliacao['dsavaliacao'] . "</td>" .
                 "   <td>" . $avaliacao['dsmateria'] . "</td>" .
-                # ------------------------------------------------
                 "   <td>" .
-                '   <form action="proc_del_avaliacao.php" method="POST">' .
+                '   <form action="proc_del_avaliacao.php" method="POST" id="button_'.$avaliacao['idavaliacao'].'">' .
                 '       <input type="hidden" value="' . $avaliacao['idavaliacao'] . '" name="idavaliacaoDEL" />' .
-                '       <input type="submit" value="Excluir">' .
-                "       </form>" .
+                '       <div class="table_button" onClick="document.getElementById(`button_'.$avaliacao['idavaliacao'].'`).submit()">Excluir</div>' .
+                "   </form>" .
                 "   </td>" .
                 "</tr>";                  
         }
@@ -117,7 +116,7 @@ if(isset($_GET['tipo']) && isset($_GET['materia'])){
 
         <tfoot>
             <tr>
-                <td colspan="3">
+                <td colspan="4">
                     <?php
                     if (isset($_GET['upd'])) echo "Registro alterado";
                     if (isset($_GET['del'])) {

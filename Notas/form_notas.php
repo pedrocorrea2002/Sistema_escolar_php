@@ -94,9 +94,9 @@ if(isset($_GET['filter'])){
                     ' <td>' . $nota['dsavaliacao']." / ".$nota['dsmateria']. '</td>' .
                     ' <td>' . number_format($nota['nota'], 1, '.','') . '</td>' .
                     ' <td>' .
-                    '   <form action="proc_del_notas.php" method="POST">' .
+                    '   <form action="proc_del_notas.php" method="POST" id="button_'.$nota['idavaliacaoaluno'].'">' .
                     '       <input type="hidden" name="idnotasDEL" value="' . $nota['idavaliacaoaluno'] . '" />' .
-                    '       <input type="submit" value="Excluir" />' .
+                    '       <div class="table_button" onClick="document.getElementById(`button_'.$nota['idavaliacaoaluno'].'`).submit()">Excluir</div>' .
                     '   </form>' .
                     ' </td>' .
                     '</tr>';
