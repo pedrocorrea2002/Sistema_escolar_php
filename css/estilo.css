@@ -15,7 +15,7 @@ body {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: rgb(23, 32, 116);
   overflow-x: hidden;
 }
 
@@ -111,7 +111,7 @@ tfoot {
 }
 
 .table_button:hover{
-  background-color: black;
+  background-color: rgb(23, 32, 116);
   color: white;
   cursor: pointer;
 }
