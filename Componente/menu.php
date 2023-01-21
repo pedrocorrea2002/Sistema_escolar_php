@@ -1,3 +1,4 @@
+<?php?>
 <div class="sidenav">
         <a href="../index/form_inicial.php"><img src="../Imagens/pagina_inicial.png"/>Página Inicial</a>
         <a href="../aluno/form_aluno.php"><img src="../Imagens/admin_alunos.png"/>Administração de alunos</a>
