@@ -1,5 +1,7 @@
 # Sistema de gerenciamento escolar
 
+![altText](https://github.com/pedrocorrea2002/Sistema_escolar_php/blob/master/Imagens/SistemaEscolar.gif?raw=true)
+
 ## ℹ️ Sobre
 Sistema para cadastro e gerenciamento de materiais, avaliações, notas e alunos feito em PHP.
 
