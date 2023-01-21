@@ -4,7 +4,7 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 $user = 'root';
 $password = '';
-$database = 'aedb_php';
+$database = 'escola_php';
 
 # O hostname deve ser localhost no nosso exemplo
 # lembre de iniciar o Apache e o Mysql 
