@@ -10,22 +10,35 @@ body {
 
 .sidenav {
   height: 100%;
-  width: 240px;
+  width: 60px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
   background-color: rgb(23, 32, 116);
   overflow-x: hidden;
+
+  transition: width 0.5s;
+}
+
+.sidenav:hover{
+  width: 300px;
+}
+
+.sidenav:hover > a {
+  font-size: medium;
 }
 
 .sidenav a {
-  color: white;
+  color: #fff;
   padding: 16px;
   text-decoration: none;
+  font-size:0px;
+  
   display: flex;
-
   align-items: center;
+
+  transition: font-size 0.5s;
 }
 
 .sidenav a:hover {
@@ -40,7 +53,7 @@ body {
 }
 
 .content {
-  margin-left: 240px;
+  margin-left: 60px;
   padding-left: 10px;
 }
 
@@ -65,7 +78,6 @@ tbody {
   font-size: large;
 }
 
-/*^ ESTILO DAS CÉLULAS DO CABEÇALHO*/
 th {
   border: 3px black solid;
   border-right: 0px;
@@ -75,7 +87,6 @@ th:last-child {
   border-right: 3px black solid;
 }
 
-/*^ ESTILO DAS CÉLULAS DO CORPO DA TABELA*/
 td {
   border-left: 3px black solid;
   padding:2px;

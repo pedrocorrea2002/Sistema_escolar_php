@@ -22,7 +22,7 @@ body {
   color: white;
 }
 
-/* The grid container */
+/*^ O Grid em si */
 .grid-container {
   height:100vh; 
   background-image: url('../Imagens/fundo_login.jpg');
@@ -89,7 +89,6 @@ input[type=submit]:hover {
   align-items: flex-end;
 
   color: white;
-
   font-weight: bold;
 }
 
@@ -116,9 +115,3 @@ input[type=text],input[type=password], select, textarea {
   margin-bottom: 16px;
   resize: vertical;
 }
-
-/* .container {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-} */
