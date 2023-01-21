@@ -24,7 +24,7 @@ Sistema para cadastro e gerenciamento de materiais, avaliações, notas e alunos
 >```
 >git clone https://github.com/pedrocorrea2002/Sistema_escolar_php.git
 >```
->OBS: Caso não tiver o Git instalado, basta baixar o projeto manualmente pelo próprio github e descompactar ele dentro da pasta www.
+>OBS: Caso não tiver o Git instalado, basta baixar o projeto manualmente pelo próprio github e descompactar ele dentro da pasta www
 
 Agora que o projeto foi baixado, execute o wampserver e dentro do seu navegador acesse o link "localhost/phpmyadmin", por padrão o usuário é "root" e não possui senha, procure pela aba SQL na parte superior do site e cole ali dentro o conteudo do arquivo database.sql que está dentro da pasta Utils do projeto.
 
