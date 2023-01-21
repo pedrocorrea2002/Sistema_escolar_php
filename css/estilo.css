@@ -25,11 +25,21 @@ body {
   width: 300px;
 }
 
+.sidenav:hover > div a {
+  font-size: medium;
+}
+
 .sidenav:hover > a {
   font-size: medium;
 }
 
+.pages_menu{
+  height: calc(100% - 60px);
+}
+
 .sidenav a {
+  height: 60px;
+
   color: #fff;
   padding: 16px;
   text-decoration: none;
@@ -44,6 +54,12 @@ body {
 .sidenav a:hover {
   background-color: #ddd;
   color: black;
+}
+
+.sidenav a[class="logout_button"]:hover {
+  background-color: red;
+  color: white;
+  font-weight: bold;
 }
 
 .sidenav a img {
