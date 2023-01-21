@@ -9,7 +9,7 @@
         $sqlInsert = "insert into login(dslogin,dssenha,idaluno) values ('@nome','@senha','@id')";
 
         $sql = str_replace("@nome",$dslogin,$sqlInsert);
-        $sql = str_replace("@senha",md5($dssenha),$sql);
+        $sql = str_replace("@senha",$dssenha,$sql);
         $sql = str_replace("@id",$idaluno,$sql);
 
         insereRegistro($sql);

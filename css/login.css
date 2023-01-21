@@ -62,7 +62,7 @@ input[type=submit] {
   font-size: 15px;
   color: white;
 
-  background-color: #0407aa;
+  background-color: #184d8a;
   padding: 12px 20px;
   border: none;
   border-radius: 15px;
@@ -71,7 +71,7 @@ input[type=submit] {
 
 /*^ ESTILO DO BOTÃO QUANDO PRESSIONADO*/
 input[type=submit]:hover {
-  background-color: #0003cf;
+  background-color: #315a88;
 }
 
 /*^ PARTE DIREITA DO GRID*/
