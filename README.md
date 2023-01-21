@@ -28,7 +28,7 @@ Sistema para cadastro e gerenciamento de materiais, avaliações, notas e alunos
 
 Agora que o projeto foi baixado, execute o wampserver e dentro do seu navegador acesse o link "localhost/phpmyadmin", por padrão o usuário é "root" e não possui senha, procure pela aba SQL na parte superior do site e cole ali dentro o conteudo do arquivo database.sql que está dentro da pasta Utils do projeto.
 
-Agora que o banco de dados também já foi criado, basta dentro do seu navegador acessar o link "localhost/Sistema_escolar_php/20221118oficial_2/Login/form_login.php". O usuário e a senha padrão são ambos "admin".
+Agora que o banco de dados também já foi criado, basta dentro do seu navegador acessar o link "localhost/Sistema_escolar_php/Login/form_login.php". O usuário e a senha padrão são ambos "admin".
 
 ### 🤓🤓 Colaboradores:
 - [Pedro Henrique](https://github.com/pedrocorrea2002)
